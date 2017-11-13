@@ -10,8 +10,6 @@ public class PlayerControl : MonoBehaviour {
 	private Vector3 moveInput;
 	private Vector3 moveVelocity;
 
-	private float speed = 0.2f;
-
 	void Start() {
 		rigidBody = GetComponent<Rigidbody>();
 	}
