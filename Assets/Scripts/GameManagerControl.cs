@@ -12,7 +12,7 @@ public class GameManagerControl : MonoBehaviour
     public PlayerControl Player3ControllerScript;
     public PlayerControl Player4ControllerScript;
 
-    private float _countDownTime = 3.0f;
+    private float _countDownTime = 4.0f;
 
     void Awake()
     {
@@ -41,17 +41,19 @@ public class GameManagerControl : MonoBehaviour
         {
             yield return new WaitForSeconds(_countDownTime);
             StopAllCoroutines();
-            ResumeScripts();
+            ResumeGame();
         }
     }
 
     // Enables scripts
-    private void ResumeScripts()
+    private void ResumeGame()
     {
         Player1ControllerScript.enabled = true;
         Player2ControllerScript.enabled = true;
         Player3ControllerScript.enabled = true;
         Player4ControllerScript.enabled = true;
+
+        CanvasControllerScript.ResumePlay();
     }
 
     // Disables scripts so the players are "frozen"

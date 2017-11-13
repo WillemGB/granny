@@ -69,16 +69,23 @@ public class CanvasController : MonoBehaviour
         _timerActive = false;
     }
 
+    public void ResumePlay()
+    {
+        CountdownImage.enabled = false;
+        CountdownImage.sprite = ThreeSprite;
+
+        _countdownActive = false;
+
+        StartTimer();
+    }
+
     public void StartCountdown(float countDownTimerLength)
     {
         _countdownSeconds = countDownTimerLength;
 
         CountdownImage.enabled = true;
-        CountdownImage.sprite = ThreeSprite;
 
         _countdownActive = true;
-
-        StartTimer();
     }
 
     private void ShowEndGame()
