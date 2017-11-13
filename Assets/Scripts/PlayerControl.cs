@@ -56,4 +56,20 @@ public class PlayerControl : MonoBehaviour {
 			}
 		}
 	}
+
+	void OnTriggerEnter(Collider other) {
+		Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
+		if (comps.Length > 0) {
+			other.GetComponent<Renderer> ().material.shader = Shader.Find ("Outlined/SilhouettedDiffuseTexture");
+		}
+	}
+
+	void OnTriggerExit(Collider other) {
+		Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
+		if (comps.Length > 0) {
+			var shader = Shader.Find ("Diffuse");
+			other.GetComponent<Renderer> ().material.shader = shader;
+		}
+	}
+
 }
