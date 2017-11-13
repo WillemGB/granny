@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManagerControl : MonoBehaviour
 {
     public static GameManagerControl instance = null;
+	public bool debugging = false;
     public CanvasController CanvasControllerScript;
     public PlayerControl Player1ControllerScript;
     public PlayerControl Player2ControllerScript;
@@ -26,12 +27,14 @@ public class GameManagerControl : MonoBehaviour
         // Init the canvas controller
         CanvasControllerScript = FindObjectOfType<CanvasController>();
 
-        // Freeze player Scripts
-        DisableScripts();
+		if (!debugging) {
+	        // Freeze player Scripts
+	        DisableScripts();
 
-        // Starts Countdown
-        CanvasControllerScript.StartCountdown(_countDownTime);
-        StartCoroutine(this.WaitForCountdown());
+	        // Starts Countdown
+	        CanvasControllerScript.StartCountdown(_countDownTime);
+	        StartCoroutine(this.WaitForCountdown());
+		}
     }
 
     // Waits for a async countdown
