@@ -32,14 +32,7 @@ public class PlayerControl : MonoBehaviour {
 		moveInput = new Vector3 (Input.GetAxisRaw ("Horizontal" + controllerNumber), 0f, Input.GetAxisRaw ("Vertical" + controllerNumber));
 		moveVelocity = moveInput * moveSpeed;
 
-        if(moveInput == Vector3.zero)
-        {
-            walking = false;
-        }
-        else
-        {
-            walking = true;
-        }
+		walking = moveInput != Vector3.zero;
 	}
 
 	void FixedUpdate() {
@@ -48,15 +41,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 
 		// slerp model in de richting van beweging
-		if(moveInput != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveInput.normalized), 0.2f);
-
-		if (Input.GetButtonDown("Fire1" + controllerNumber))
-		{
-			//Debug.Log("HIT");
-			//other.gameObject.GetComponent<Rigidbody> ().AddForce(this.transform.forward * 5000, ForceMode.Force);
-			//other.gameObject.GetComponent<Rigidbody> ().velocity = this.transform.forward * 500;
-			//this.rigidBody.AddForce(this.transform.forward * 100, ForceMode.Acceleration);
-		}
+		if(rigidBody.velocity != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rigidBody.velocity.normalized), 0.2f);
 
         Animate();
         
