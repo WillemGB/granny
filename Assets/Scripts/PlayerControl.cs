@@ -47,5 +47,13 @@ public class PlayerControl : MonoBehaviour {
 			other.gameObject.GetComponent<Rigidbody> ().AddForce(this.transform.forward * characterStrength, ForceMode.Acceleration);
 			//other.gameObject.GetComponent<Rigidbody> ().velocity = this.transform.forward * 500;
 		}
+
+		if (Input.GetButtonDown("Fire1" + controllerNumber)) {
+			Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
+			foreach (Component com in comps) {
+				var interactableScript = com as InteractionInterface;
+				interactableScript.onUse ();
+			}
+		}
 	}
 }
