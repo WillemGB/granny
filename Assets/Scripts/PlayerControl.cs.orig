@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System;
 
 public class PlayerControl : MonoBehaviour {
 
@@ -43,7 +42,7 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		if (Math.Abs(rigidBody.velocity.x) < maxSpeed && Math.Abs(rigidBody.velocity.z) < maxSpeed) {
+		if (rigidBody.velocity.x < maxSpeed && rigidBody.velocity.z < maxSpeed) {
 			rigidBody.AddForce (moveVelocity, ForceMode.Force);
 		}
 
@@ -80,16 +79,7 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
-    void Animate()
-    {
-        Debug.Log("ani:" + walking);
-        if(granny != null)
-        {
-            grannyAnimator.SetBool("Walking", walking);
-        }
-    }
-
-
+<<<<<<< HEAD
 	void OnTriggerEnter(Collider other) {
 		Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
 		if (comps.Length > 0) {
@@ -105,4 +95,14 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
+=======
+    void Animate()
+    {
+        Debug.Log("ani:" + walking);
+        if(granny != null)
+        {
+            grannyAnimator.SetBool("Walking", walking);
+        }
+    }
+>>>>>>> origin/master
 }

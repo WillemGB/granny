@@ -2,7 +2,7 @@
      Properties {
          _Color ("Main Color", Color) = (.5,.5,.5,1)
          _OutlineColor ("Outline Color", Color) = (142, 82, 0,0.5)
-         _Outline ("Outline width", Range (0.0, 0.4)) = .4
+         _Outline ("Outline width", Range (0.0, 2.0)) = 2.0
          _MainTex ("Base (RGB)", 2D) = "white" { }
      }
   
