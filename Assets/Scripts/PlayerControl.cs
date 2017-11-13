@@ -3,23 +3,42 @@ using System.Collections;
 
 public class PlayerControl : MonoBehaviour {
 
+    public GameObject granny;
 	public float moveSpeed = 0.5f;
 	public int characterStrength = 250; 	
 	public string controllerNumber;
 	public int maxSpeed = 6;
 
 	private Rigidbody rigidBody;
-	private Vector3 moveInput;
+    private Animator grannyAnimator;
+
+    private Vector3 moveInput;
 	private Vector3 moveVelocity;
 
-	void Start() {
-		rigidBody = GetComponent<Rigidbody>();
-	}
+    private bool walking;
+
+    void Start()
+    {
+        rigidBody = GetComponent<Rigidbody>();
+        walking = false;
+        if (granny != null) { 
+            grannyAnimator = granny.GetComponent<Animator>();
+        }
+    }
 
 	void Update() {
 		// gebruik controller nummer voor juiste input axis
 		moveInput = new Vector3 (Input.GetAxisRaw ("Horizontal" + controllerNumber), 0f, Input.GetAxisRaw ("Vertical" + controllerNumber));
 		moveVelocity = moveInput * moveSpeed;
+
+        if(moveInput == Vector3.zero)
+        {
+            walking = false;
+        }
+        else
+        {
+            walking = true;
+        }
 	}
 
 	void FixedUpdate() {
@@ -37,6 +56,9 @@ public class PlayerControl : MonoBehaviour {
 			//other.gameObject.GetComponent<Rigidbody> ().velocity = this.transform.forward * 500;
 			//this.rigidBody.AddForce(this.transform.forward * 100, ForceMode.Acceleration);
 		}
+
+        Animate();
+        
 	}
 
 	void OnTriggerStay (Collider other)
@@ -56,4 +78,13 @@ public class PlayerControl : MonoBehaviour {
 			}
 		}
 	}
+
+    void Animate()
+    {
+        Debug.Log("ani:" + walking);
+        if(granny != null)
+        {
+            grannyAnimator.SetBool("Walking", walking);
+        }
+    }
 }
