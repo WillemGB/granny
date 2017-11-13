@@ -53,10 +53,7 @@ public class PlayerControl : MonoBehaviour {
 		{
 			Debug.Log("HIT enemy");
 			other.gameObject.GetComponent<Rigidbody> ().AddForce(this.transform.forward * characterStrength, ForceMode.Acceleration);
-			//other.gameObject.GetComponent<Rigidbody> ().velocity = this.transform.forward * 500;
-		}
-
-		if (Input.GetButtonDown("Fire1" + controllerNumber)) {
+		} else if (other.tag == "Interactable" && Input.GetButtonDown("Fire1" + controllerNumber)) {
 			Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
 			foreach (Component com in comps) {
 				var interactableScript = com as InteractionInterface;
@@ -67,7 +64,7 @@ public class PlayerControl : MonoBehaviour {
 
     void Animate()
     {
-        Debug.Log("ani:" + walking);
+        //Debug.Log("ani:" + walking);
         if(granny != null)
         {
             grannyAnimator.SetBool("Walking", walking);
@@ -76,17 +73,21 @@ public class PlayerControl : MonoBehaviour {
 
 
 	void OnTriggerEnter(Collider other) {
-		Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
-		if (comps.Length > 0) {
-			other.GetComponent<Renderer> ().material.shader = Shader.Find ("Outlined/SilhouettedDiffuseTexture");
+		if (other.tag == "Interactable") {
+			Component[] comps = other.gameObject.GetComponents (typeof(InteractionInterface));
+			if (comps.Length > 0) {
+				other.GetComponent<Renderer> ().material.shader = Shader.Find ("Outlined/SilhouettedDiffuseTexture");
+			}
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
-		Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
-		if (comps.Length > 0) {
-			var shader = Shader.Find ("Diffuse");
-			other.GetComponent<Renderer> ().material.shader = shader;
+		if (other.tag == "Interactable") {
+			Component[] comps = other.gameObject.GetComponents (typeof(InteractionInterface));
+			if (comps.Length > 0) {
+				var shader = Shader.Find ("Diffuse");
+				other.GetComponent<Renderer> ().material.shader = shader;
+			}
 		}
 	}
 
