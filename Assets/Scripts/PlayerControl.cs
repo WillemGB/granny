@@ -10,6 +10,8 @@ public class PlayerControl : MonoBehaviour {
 	private Vector3 moveInput;
 	private Vector3 moveVelocity;
 
+	private float speed = 0.2f;
+
 	void Start() {
 		rigidBody = GetComponent<Rigidbody>();
 	}
@@ -21,9 +23,11 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		rigidBody.velocity = moveVelocity;
+		rigidBody.velocity = rigidBody.velocity + moveVelocity;
 
 		// slerp model in de richting van beweging
-		if(moveInput != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveInput.normalized), 0.2f);
+		if (moveInput != Vector3.zero) {
+			transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.LookRotation (moveInput.normalized), 0.2f);
+		}
 	}
 }
