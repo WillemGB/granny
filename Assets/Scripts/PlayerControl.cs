@@ -38,7 +38,9 @@ public class PlayerControl : MonoBehaviour {
 
 		walking = moveInput != Vector3.zero;
 
-	    if (_abilityCooldownTime < 0)
+	    Debug.Log("cooldown: " + _abilityCooldownTime);
+
+        if (_abilityCooldownTime > 0)
 	        _abilityCooldownTime -= Time.deltaTime;
 	}
 
@@ -52,7 +54,8 @@ public class PlayerControl : MonoBehaviour {
 
         Animate();
 
-	    PeformPlayerAblity();
+        if (Input.GetButtonDown("Fire1" + controllerNumber) && _abilityCooldownTime < 0)
+	        PeformPlayerAblity();
 	}
 
 	void OnTriggerStay (Collider other)
@@ -101,27 +104,27 @@ public class PlayerControl : MonoBehaviour {
 
     void PeformPlayerAblity()
     {
-        if (_abilityCooldownTime < 0)
+        // Peform action based on controller number
+        switch (controllerNumber)
         {
-            // Peform action based on controller number
-            switch (controllerNumber)
-            {
-                case "":
-                    Debug.Log("Player 1 peforms ...");
-                    break;
-                case "2":
-                    Debug.Log("Player 2 peforms ...");
-                    break;
-                case "3":
-                    Debug.Log("Player 3 peforms ...");
-                    break;
-                case "4":
-                    Debug.Log("Player 4 peforms ...");
-                    break;
-                default: break;
-            }
+            case "":
+                Debug.Log("Player 1 peforms dash");
 
-            _abilityCooldownTime = abilityCooldownTime;
-        }   
+                break;
+            case "2":
+                Debug.Log("Player 2 peforms ...");
+                break;
+            case "3":
+                Debug.Log("Player 3 peforms ...");
+                break;
+            case "4":
+                Debug.Log("Player 4 peforms ...");
+                break;
+            default:
+                Debug.Log("Default");
+                break;
+        }
+
+        _abilityCooldownTime = abilityCooldownTime;
     }
 }
