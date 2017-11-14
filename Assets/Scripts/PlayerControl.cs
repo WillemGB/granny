@@ -4,8 +4,9 @@ using System.Collections;
 public class PlayerControl : MonoBehaviour {
 
 	public float moveSpeed = 0.5f;
-	public int characterStrength = 250;
+	public int characterStrength = 250; 	
 	public string controllerNumber;
+	public int maxSpeed = 6;
 
 	private Rigidbody rigidBody;
 	private Vector3 moveInput;
@@ -22,7 +23,9 @@ public class PlayerControl : MonoBehaviour {
 	}
 
 	void FixedUpdate() {
-		rigidBody.velocity = rigidBody.velocity + moveVelocity;
+		if (rigidBody.velocity.x < maxSpeed && rigidBody.velocity.z < maxSpeed) {
+			rigidBody.AddForce (moveVelocity, ForceMode.Force);
+		}
 
 		// slerp model in de richting van beweging
 		if(moveInput != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveInput.normalized), 0.2f);
@@ -43,6 +46,14 @@ public class PlayerControl : MonoBehaviour {
 			Debug.Log("HIT enemy");
 			other.gameObject.GetComponent<Rigidbody> ().AddForce(this.transform.forward * characterStrength, ForceMode.Acceleration);
 			//other.gameObject.GetComponent<Rigidbody> ().velocity = this.transform.forward * 500;
+		}
+
+		if (Input.GetButtonDown("Fire1" + controllerNumber)) {
+			Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
+			foreach (Component com in comps) {
+				var interactableScript = com as InteractionInterface;
+				interactableScript.onUse ();
+			}
 		}
 	}
 }
