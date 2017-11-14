@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour {
 	public string controllerNumber;
 	public int maxSpeed = 6;
     public float abilityCooldownTime;
+    public GameObject canUseAbility;
 
     public GameObject stunPrefab;
     public float stunTime;
@@ -61,6 +62,16 @@ public class PlayerControl : MonoBehaviour {
 
         Animate();
 
+        if (_abilityCooldownTime < 0)
+        {
+
+            canUseAbility.SetActive(true);
+        }
+        else
+        {
+            canUseAbility.SetActive(false);
+        }
+
         if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
 	}
@@ -103,8 +114,7 @@ public class PlayerControl : MonoBehaviour {
 		if (other.tag == "Interactable") {
 			Component[] comps = other.gameObject.GetComponents (typeof(InteractionInterface));
 			if (comps.Length > 0) {
-				var shader = Shader.Find ("Diffuse");
-				other.GetComponent<Renderer> ().material.shader = shader;
+				other.GetComponent<Renderer> ().material.shader = Shader.Find("Diffuse");
 			}
 		}
 	}
@@ -118,16 +128,19 @@ public class PlayerControl : MonoBehaviour {
                 Debug.Log("Player 1 shoots fake teeth!");
                 shootFakeTeeth();
                 break;
-            case "2":
-                Debug.Log("Player 2 performs ...");
-				Instantiate (DiarrheaPrefab, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z), Quaternion.identity);
+		case "2":
+			Debug.Log ("Player 2 performs ...");
+			var spawnPos = this.transform.position - (transform.forward / 2);  // spawn behind player
+			spawnPos.y = spawnPos.y - 1.2f;
+			var randomRotation = Quaternion.Euler (0, UnityEngine.Random.Range (0, 360), 0);
+			Instantiate (DiarrheaPrefab, spawnPos, randomRotation);
                 break;
             case "3":
                 Debug.Log("Player 3 performs ...");
                 break;
             case "4":
                 Debug.Log("Player 4 performs dash");
-                rigidBody.AddForce(moveVelocity * 30, ForceMode.Force);
+                rigidBody.AddForce(moveVelocity * 75, ForceMode.Force);
                 break;
             default:
                 Debug.Log("Default");
@@ -137,7 +150,7 @@ public class PlayerControl : MonoBehaviour {
         _abilityCooldownTime = abilityCooldownTime;
     }
 
-    void Stun()
+    public void Stun()
     {
         var stun = Instantiate(stunPrefab, gameObject.transform);
 

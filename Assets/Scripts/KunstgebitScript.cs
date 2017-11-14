@@ -16,7 +16,10 @@ public class KunstgebitScript : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.other.tag == "Player")
-            Destroy(this);
+        if ((collision.other.name != "Player1") && collision.other.tag == "Player")
+        {
+            Destroy(this.gameObject);
+            collision.other.GetComponent<PlayerControl>().Stun();
+        }
     }
 }

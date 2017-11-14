@@ -6,10 +6,9 @@ public class SlowDownController : MonoBehaviour {
     public int newMaxSpeed;
     public int origionalMaxSpeed;
 
-    void OnTriggerEnter(Collider other)
+    void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag == "Player") {
-            origionalMaxSpeed = other.GetComponent<PlayerControl>().maxSpeed;
             other.GetComponent<PlayerControl>().maxSpeed = newMaxSpeed;
         }
     }
