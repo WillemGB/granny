@@ -41,13 +41,8 @@ public class PlayerControl : MonoBehaviour {
         if (granny != null) { 
             grannyAnimator = granny.GetComponent<Animator>();
         }
-<<<<<<< HEAD
         _abilityCooldownTime = -0.1F;
         audioSource = GetComponent<AudioSource>();
-=======
-
-        _abilityCooldownTime = 0.1f;
->>>>>>> f481743a28cab43e115a4dba582bd474c771aefc
     }
 
 	void Update() {
