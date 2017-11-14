@@ -6,6 +6,11 @@ public class DoorScript : MonoBehaviour
 {
     Animator anim;
 
+    void Awake()
+    {
+        anim = GetComponent<Animator>();
+    }
+
     void OnTriggerEnter(Collider other)
     {
         anim.SetBool("OpenDoor", true);
@@ -15,6 +20,11 @@ public class DoorScript : MonoBehaviour
     {
         anim.enabled = true;
         anim.SetBool("OpenDoor", false);
+    }
+
+    public void openDetectedDoor()
+    {
+        anim.SetBool("OpenDoorDetector", true);
     }
 
     void onPauseAnimation()
