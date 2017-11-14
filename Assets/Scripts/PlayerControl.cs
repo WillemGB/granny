@@ -4,6 +4,9 @@ using System;
 
 public class PlayerControl : MonoBehaviour {
 
+    public AudioClip OnShootAudioClip;
+    public AudioSource audioSource;
+
     public GameObject granny;
 	public float moveSpeed = 0.5f;
 	public int characterStrength = 250; 	
@@ -38,8 +41,8 @@ public class PlayerControl : MonoBehaviour {
         if (granny != null) { 
             grannyAnimator = granny.GetComponent<Animator>();
         }
-
-        _abilityCooldownTime = 0.1f;
+        _abilityCooldownTime = -0.1F;
+        audioSource = GetComponent<AudioSource>();
     }
 
 	void Update() {
@@ -182,7 +185,6 @@ public class PlayerControl : MonoBehaviour {
         //Tell the bullet to be "pushed" forward by an amount set by Bullet_Forward_Force.
         Temporary_RigidBody.AddForce(transform.forward * Bullet_Forward_Force);
 
-        //Basic Clean Up, set the Bullets to self destruct after 10 Seconds, I am being VERY generous here, normally 3 seconds is plenty.
-        Destroy(Temporary_Bullet_Handler, 10.0f);
+        Destroy(Temporary_Bullet_Handler, 2.0f);
     }
 }
