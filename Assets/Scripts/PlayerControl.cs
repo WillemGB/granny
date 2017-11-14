@@ -140,7 +140,7 @@ public class PlayerControl : MonoBehaviour {
                 break;
             case "4":
                 Debug.Log("Player 4 performs dash");
-                rigidBody.AddForce(moveVelocity * 30, ForceMode.Force);
+                rigidBody.AddForce(moveVelocity * 75, ForceMode.Force);
                 break;
             default:
                 Debug.Log("Default");
