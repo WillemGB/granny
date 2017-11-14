@@ -22,6 +22,12 @@ public class PlayerControl : MonoBehaviour {
     private Vector3 moveInput;
 	private Vector3 moveVelocity;
 
+    public GameObject Mond;
+
+    public GameObject KunstGebit;
+
+    public float Bullet_Forward_Force;
+
     private bool walking;
 
     void Start()
@@ -57,7 +63,7 @@ public class PlayerControl : MonoBehaviour {
         Animate();
 
         if (Input.GetButtonDown("Fire1" + controllerNumber) && _abilityCooldownTime < 0)
-	        PeformPlayerAblity();
+	        PerformPlayerAbility();
 	}
 
 	void OnTriggerStay (Collider other)
@@ -104,22 +110,23 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
-    void PeformPlayerAblity()
+    void PerformPlayerAbility()
     {
-        // Peform action based on controller number
+        // Perform action based on controller number
         switch (controllerNumber)
         {
             case "":
-                Debug.Log("Player 1 peforms ...");
+                Debug.Log("Player 1 shoots fake teeth!");
+                shootFakeTeeth();
                 break;
             case "2":
-                Debug.Log("Player 2 peforms ...");
+                Debug.Log("Player 2 performs ...");
                 break;
             case "3":
-                Debug.Log("Player 3 peforms ...");
+                Debug.Log("Player 3 performs ...");
                 break;
             case "4":
-                Debug.Log("Player 4 peforms dash");
+                Debug.Log("Player 4 performs dash");
                 rigidBody.AddForce(moveVelocity * 30, ForceMode.Force);
                 break;
             default:
@@ -154,5 +161,25 @@ public class PlayerControl : MonoBehaviour {
             StopAllCoroutines();
             ResumeFromStun();
         }
+
+    void shootFakeTeeth()
+    {
+        //The Bullet instantiation happens here.
+        GameObject Temporary_Bullet_Handler;
+        Temporary_Bullet_Handler = Instantiate(KunstGebit, Mond.transform.position, Mond.transform.rotation) as GameObject;
+
+        //Sometimes bullets may appear rotated incorrectly due to the way its pivot was set from the original modeling package.
+        //This is EASILY corrected here, you might have to rotate it from a different axis and or angle based on your particular mesh.
+        Temporary_Bullet_Handler.transform.Rotate(Vector3.left * 90);
+
+        //Retrieve the Rigidbody component from the instantiated Bullet and control it.
+        Rigidbody Temporary_RigidBody;
+        Temporary_RigidBody = Temporary_Bullet_Handler.GetComponent<Rigidbody>();
+
+        //Tell the bullet to be "pushed" forward by an amount set by Bullet_Forward_Force.
+        Temporary_RigidBody.AddForce(transform.forward * Bullet_Forward_Force);
+
+        //Basic Clean Up, set the Bullets to self destruct after 10 Seconds, I am being VERY generous here, normally 3 seconds is plenty.
+        Destroy(Temporary_Bullet_Handler, 10.0f);
     }
 }
