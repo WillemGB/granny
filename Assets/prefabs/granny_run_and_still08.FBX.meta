@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 064894c4b773b8948abdebb6c350bec9
-timeCreated: 1510587395
+guid: 5723687eeb5665c4f9451f8ece1375e4
+timeCreated: 1510646277
 licenseType: Free
 ModelImporter:
   serializedVersion: 22
@@ -108,24 +108,14 @@ ModelImporter:
     4300032: Hear top
     4300034: Sphere018
     4300036: Sphere019
-    7400000: Walking
-    7400002: Standing
+    7400000: Standing
+    7400002: Walking
     9500000: //RootNode
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: 01 - Default
-    second: {fileID: 2100000, guid: 8aebe2f1d4f0f814a85ff113c7f5dde3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 04 - Default
-    second: {fileID: 2100000, guid: f9528798e462b434fb7323cd9d4d903b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: 05 - Default
+      name: Body
     second: {fileID: 2100000, guid: b57e2757631af57449e3183bce435073, type: 2}
   - first:
       type: UnityEngine:Material
@@ -140,8 +130,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Kop
+    second: {fileID: 2100000, guid: 8aebe2f1d4f0f814a85ff113c7f5dde3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: No Name
     second: {fileID: 2100000, guid: 3b9ac253bb27258409b40371a5be6cf5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoe
+    second: {fileID: 2100000, guid: f09f30fdac3ddd249b03f8cc673262d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoe bottom
+    second: {fileID: 2100000, guid: 30b55f062d8833447bb20c69c5a21a03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin_granny
+    second: {fileID: 2100000, guid: cb567b046ed86104e812c8c6593650fd, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -205,7 +215,7 @@ ModelImporter:
       name: Standing
       takeName: Take 001
       firstFrame: 37
-      lastFrame: 73
+      lastFrame: 75
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
