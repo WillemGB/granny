@@ -137,7 +137,7 @@ public class PlayerControl : MonoBehaviour {
         _abilityCooldownTime = abilityCooldownTime;
     }
 
-    void Stun()
+    public void Stun()
     {
         var stun = Instantiate(stunPrefab, gameObject.transform);
 
