@@ -14,6 +14,8 @@ public class PlayerControl : MonoBehaviour {
     public GameObject stunPrefab;
     public float stunTime;
 
+    public GameObject punchPrefab;
+
     private float _abilityCooldownTime;
 
     private Rigidbody rigidBody;
@@ -129,14 +131,15 @@ public class PlayerControl : MonoBehaviour {
                 shootFakeTeeth();
                 break;
 		case "2":
-			Debug.Log ("Player 2 performs ...");
+			Debug.Log ("Player 2 shits himself");
 			var spawnPos = this.transform.position - (transform.forward / 2);  // spawn behind player
 			spawnPos.y = spawnPos.y - 1.2f;
 			var randomRotation = Quaternion.Euler (0, UnityEngine.Random.Range (0, 360), 0);
 			Instantiate (DiarrheaPrefab, spawnPos, randomRotation);
                 break;
             case "3":
-                Debug.Log("Player 3 performs ...");
+                Debug.Log("Player 3 punches");
+                Punch();
                 break;
             case "4":
                 Debug.Log("Player 4 performs dash");
@@ -194,5 +197,12 @@ public class PlayerControl : MonoBehaviour {
         Temporary_RigidBody.AddForce(transform.forward * Bullet_Forward_Force);
 
         Destroy(Temporary_Bullet_Handler, 2.0f);
+    }
+
+    void Punch()
+    {
+        var punchHandler = Instantiate(punchPrefab, gameObject.transform);
+
+        Destroy(punchHandler, 1.0f);
     }
 }
