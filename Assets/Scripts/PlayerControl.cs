@@ -30,11 +30,14 @@ public class PlayerControl : MonoBehaviour {
     public float Bullet_Forward_Force;
 
     private bool walking;
+    private bool isPushing;
+    float timeSinceLastCall;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         walking = false;
+        isPushing = false;
         if (granny != null) { 
             grannyAnimator = granny.GetComponent<Animator>();
         }
@@ -50,7 +53,7 @@ public class PlayerControl : MonoBehaviour {
 
         if (_abilityCooldownTime > 0)
 	        _abilityCooldownTime -= Time.deltaTime;
-	}
+    }
 
 	void FixedUpdate() {
 		if (Math.Abs(rigidBody.velocity.x) < maxSpeed && Math.Abs(rigidBody.velocity.z) < maxSpeed) {
@@ -59,8 +62,6 @@ public class PlayerControl : MonoBehaviour {
 
 		// slerp model in de richting van beweging
 		if(rigidBody.velocity != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rigidBody.velocity.normalized), 0.2f);
-
-        Animate();
 
         if (_abilityCooldownTime < 0)
         {
@@ -74,7 +75,18 @@ public class PlayerControl : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
-	}
+        if(Input.GetButtonDown("Fire1" + controllerNumber))
+            isPushing = true;
+
+        timeSinceLastCall += Time.deltaTime;
+        if (timeSinceLastCall >= 0.33)
+        {
+            isPushing = false;
+            timeSinceLastCall = 0;   // reset timer back to 0
+        }
+
+        Animate();
+    }
 
 	void OnTriggerStay (Collider other)
 	{
@@ -82,6 +94,7 @@ public class PlayerControl : MonoBehaviour {
 		{
 			Debug.Log("HIT enemy");
 			other.gameObject.GetComponent<Rigidbody> ().AddForce(this.transform.forward * characterStrength, ForceMode.Acceleration);
+           
 		} else if (other.tag == "Interactable" && Input.GetButtonDown("Fire1" + controllerNumber)) {
 			Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
 			foreach (Component com in comps) {
@@ -97,6 +110,7 @@ public class PlayerControl : MonoBehaviour {
         if(granny != null)
         {
             grannyAnimator.SetBool("Walking", walking);
+            grannyAnimator.SetBool("IsPushing", isPushing);
         }
     }
 
