@@ -9,8 +9,11 @@ public class PlayerControl : MonoBehaviour {
 	public int characterStrength = 250; 	
 	public string controllerNumber;
 	public int maxSpeed = 6;
+    public float abilityCooldownTime;
 
-	private Rigidbody rigidBody;
+    private float _abilityCooldownTime;
+
+    private Rigidbody rigidBody;
     private Animator grannyAnimator;
 
     private Vector3 moveInput;
@@ -25,6 +28,7 @@ public class PlayerControl : MonoBehaviour {
         if (granny != null) { 
             grannyAnimator = granny.GetComponent<Animator>();
         }
+        _abilityCooldownTime = abilityCooldownTime;
     }
 
 	void Update() {
@@ -33,6 +37,9 @@ public class PlayerControl : MonoBehaviour {
 		moveVelocity = moveInput * moveSpeed;
 
 		walking = moveInput != Vector3.zero;
+
+	    if (_abilityCooldownTime < 0)
+	        _abilityCooldownTime -= Time.deltaTime;
 	}
 
 	void FixedUpdate() {
@@ -44,7 +51,8 @@ public class PlayerControl : MonoBehaviour {
 		if(rigidBody.velocity != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rigidBody.velocity.normalized), 0.2f);
 
         Animate();
-        
+
+	    PeformPlayerAblity();
 	}
 
 	void OnTriggerStay (Collider other)
@@ -91,4 +99,14 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
+    void PeformPlayerAblity()
+    {
+        if (_abilityCooldownTime < 0)
+        {
+            // Peform action (check type?)
+
+
+            _abilityCooldownTime = abilityCooldownTime;
+        }   
+    }
 }
