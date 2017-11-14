@@ -14,6 +14,9 @@ public class PlayerControl : MonoBehaviour {
 	public int maxSpeed = 6;
     public float abilityCooldownTime;
 
+    public GameObject stunPrefab;
+    public float stunTime;
+
     private float _abilityCooldownTime;
 
     private Rigidbody rigidBody;
@@ -25,6 +28,7 @@ public class PlayerControl : MonoBehaviour {
     public GameObject Mond;
 
     public GameObject KunstGebit;
+	public GameObject DiarrheaPrefab;
 
     public float Bullet_Forward_Force;
 
@@ -37,8 +41,13 @@ public class PlayerControl : MonoBehaviour {
         if (granny != null) { 
             grannyAnimator = granny.GetComponent<Animator>();
         }
+<<<<<<< HEAD
         _abilityCooldownTime = -0.1F;
         audioSource = GetComponent<AudioSource>();
+=======
+
+        _abilityCooldownTime = 0.1f;
+>>>>>>> f481743a28cab43e115a4dba582bd474c771aefc
     }
 
 	void Update() {
@@ -62,7 +71,7 @@ public class PlayerControl : MonoBehaviour {
 
         Animate();
 
-        if (Input.GetButtonDown("Fire1" + controllerNumber) && _abilityCooldownTime < 0)
+        if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
 	}
 
@@ -121,6 +130,7 @@ public class PlayerControl : MonoBehaviour {
                 break;
             case "2":
                 Debug.Log("Player 2 performs ...");
+				Instantiate (DiarrheaPrefab, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z), Quaternion.identity);
                 break;
             case "3":
                 Debug.Log("Player 3 performs ...");
@@ -136,6 +146,32 @@ public class PlayerControl : MonoBehaviour {
 
         _abilityCooldownTime = abilityCooldownTime;
     }
+
+    void Stun()
+    {
+        var stun = Instantiate(stunPrefab, gameObject.transform);
+
+        StartCoroutine(this.WaitForStunCountdown());
+        walking = false;
+        Animate();
+        enabled = false;
+        Destroy(stun, stunTime);
+    }
+
+    private void ResumeFromStun()
+    {
+        this.enabled = true;
+    }
+
+    private IEnumerator WaitForStunCountdown()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(stunTime);
+            StopAllCoroutines();
+            ResumeFromStun();
+        }
+	}
 
     void shootFakeTeeth()
     {
