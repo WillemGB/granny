@@ -3,10 +3,6 @@ using System.Collections;
 using System;
 
 public class PlayerControl : MonoBehaviour {
-
-    public AudioClip OnShootAudioClip;
-    public AudioSource audioSource;
-
     public GameObject granny;
 	public float moveSpeed = 0.5f;
 	public int characterStrength = 250; 	
@@ -42,7 +38,6 @@ public class PlayerControl : MonoBehaviour {
             grannyAnimator = granny.GetComponent<Animator>();
         }
         _abilityCooldownTime = -0.1F;
-        audioSource = GetComponent<AudioSource>();
     }
 
 	void Update() {
