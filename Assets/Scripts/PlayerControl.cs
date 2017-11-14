@@ -76,9 +76,33 @@ public class PlayerControl : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
-	}
 
-	void OnTriggerStay (Collider other)
+	    HandlePullBed(); //Jeroen: werkt alleen als de sphere collider uit staat
+    }
+
+    private void HandlePullBed()
+    {
+        if(Input.GetKey(KeyCode.LeftControl)) //pak het bed op als je P ingedrukt houdt
+        {
+            RaycastHit hit;
+            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+
+            if (Physics.Raycast(transform.position, fwd, out hit, 1f))
+            {
+                if (hit.transform.tag == "Bed")
+                {
+                    var fixedJoint = hit.collider.GetComponent<FixedJoint>();
+                    fixedJoint.connectedBody = this.GetComponent<Rigidbody>();
+                }
+            }
+        }
+        else
+        {
+            //Jeroen todo: loskoppelen?
+        }
+    }
+
+    void OnTriggerStay (Collider other)
 	{
 		if (Input.GetButtonDown("Fire1" + controllerNumber) && other.tag == "Player" && other.GetComponent<Rigidbody>() != rigidBody)
 		{
