@@ -11,6 +11,9 @@ public class PlayerControl : MonoBehaviour {
 	public int maxSpeed = 6;
     public float abilityCooldownTime;
 
+    public GameObject stunPrefab;
+    public float stunTime;
+
     private float _abilityCooldownTime;
 
     private Rigidbody rigidBody;
@@ -28,7 +31,8 @@ public class PlayerControl : MonoBehaviour {
         if (granny != null) { 
             grannyAnimator = granny.GetComponent<Animator>();
         }
-        _abilityCooldownTime = abilityCooldownTime;
+
+        _abilityCooldownTime = 0.1f;
     }
 
 	void Update() {
@@ -124,5 +128,31 @@ public class PlayerControl : MonoBehaviour {
         }
 
         _abilityCooldownTime = abilityCooldownTime;
+    }
+
+    void Stun()
+    {
+        var stun = Instantiate(stunPrefab, gameObject.transform);
+
+        StartCoroutine(this.WaitForStunCountdown());
+        walking = false;
+        Animate();
+        enabled = false;
+        Destroy(stun, stunTime);
+    }
+
+    private void ResumeFromStun()
+    {
+        this.enabled = true;
+    }
+
+    private IEnumerator WaitForStunCountdown()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(stunTime);
+            StopAllCoroutines();
+            ResumeFromStun();
+        }
     }
 }
