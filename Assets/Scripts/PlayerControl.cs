@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour {
 	public string controllerNumber;
 	public int maxSpeed = 6;
     public float abilityCooldownTime;
+    public GameObject canUseAbility;
 
     public GameObject stunPrefab;
     public float stunTime;
@@ -61,6 +62,16 @@ public class PlayerControl : MonoBehaviour {
 
         Animate();
 
+        if (_abilityCooldownTime < 0)
+        {
+
+            canUseAbility.SetActive(true);
+        }
+        else
+        {
+            canUseAbility.SetActive(false);
+        }
+
         if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
 	}
@@ -103,8 +114,7 @@ public class PlayerControl : MonoBehaviour {
 		if (other.tag == "Interactable") {
 			Component[] comps = other.gameObject.GetComponents (typeof(InteractionInterface));
 			if (comps.Length > 0) {
-				var shader = Shader.Find ("Diffuse");
-				other.GetComponent<Renderer> ().material.shader = shader;
+				other.GetComponent<Renderer> ().material.shader = Shader.Find("Diffuse");
 			}
 		}
 	}
