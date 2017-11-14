@@ -1,0 +1,292 @@
+fileFormatVersion: 2
+guid: 5723687eeb5665c4f9451f8ece1375e4
+timeCreated: 1510646277
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: Body
+    100002: Cylinder001
+    100004: Eyebrow Left
+    100006: Eyebrow Right
+    100008: Granny 1
+    100010: //RootNode
+    100012: Hair-knot
+    100014: Head
+    100016: Hear top
+    100018: Laars
+    100020: Laars001
+    100022: Left hand
+    100024: Line001
+    100026: Line002
+    100028: Pyramid001
+    100030: Right hand
+    100032: Sphere002
+    100034: Sphere011
+    100036: Sphere012
+    100038: Sphere015
+    100040: Sphere016
+    100042: Sphere018
+    100044: Sphere019
+    400000: Body
+    400002: Cylinder001
+    400004: Eyebrow Left
+    400006: Eyebrow Right
+    400008: Granny 1
+    400010: //RootNode
+    400012: Hair-knot
+    400014: Head
+    400016: Hear top
+    400018: Laars
+    400020: Laars001
+    400022: Left hand
+    400024: Line001
+    400026: Line002
+    400028: Pyramid001
+    400030: Right hand
+    400032: Sphere002
+    400034: Sphere011
+    400036: Sphere012
+    400038: Sphere015
+    400040: Sphere016
+    400042: Sphere018
+    400044: Sphere019
+    2300000: Body
+    2300002: Cylinder001
+    2300004: Eyebrow Left
+    2300006: Eyebrow Right
+    2300008: Hear top
+    2300010: Laars
+    2300012: Laars001
+    2300014: Left hand
+    2300016: Line001
+    2300018: Line002
+    2300020: Pyramid001
+    2300022: Right hand
+    2300024: Sphere002
+    2300026: Sphere011
+    2300028: Sphere012
+    2300030: Sphere015
+    2300032: Sphere016
+    2300034: Sphere018
+    2300036: Sphere019
+    3300000: Body
+    3300002: Cylinder001
+    3300004: Eyebrow Left
+    3300006: Eyebrow Right
+    3300008: Hear top
+    3300010: Laars
+    3300012: Laars001
+    3300014: Left hand
+    3300016: Line001
+    3300018: Line002
+    3300020: Pyramid001
+    3300022: Right hand
+    3300024: Sphere002
+    3300026: Sphere011
+    3300028: Sphere012
+    3300030: Sphere015
+    3300032: Sphere016
+    3300034: Sphere018
+    3300036: Sphere019
+    4300000: Right hand
+    4300002: Left hand
+    4300004: Laars
+    4300006: Laars001
+    4300008: Body
+    4300010: Eyebrow Right
+    4300012: Eyebrow Left
+    4300014: Sphere016
+    4300016: Sphere012
+    4300018: Sphere011
+    4300020: Sphere015
+    4300022: Line001
+    4300024: Line002
+    4300026: Pyramid001
+    4300028: Sphere002
+    4300030: Cylinder001
+    4300032: Hear top
+    4300034: Sphere018
+    4300036: Sphere019
+    7400000: Standing
+    7400002: Walking
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body
+    second: {fileID: 2100000, guid: b57e2757631af57449e3183bce435073, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Grey Hair only
+    second: {fileID: 2100000, guid: 8aebe2f1d4f0f814a85ff113c7f5dde3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Ketting
+    second: {fileID: 2100000, guid: d146cb47bf95d7247a4725e43cf57166, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Kop
+    second: {fileID: 2100000, guid: 8aebe2f1d4f0f814a85ff113c7f5dde3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 3b9ac253bb27258409b40371a5be6cf5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoe
+    second: {fileID: 2100000, guid: f09f30fdac3ddd249b03f8cc673262d9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Shoe bottom
+    second: {fileID: 2100000, guid: 30b55f062d8833447bb20c69c5a21a03, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Skin_granny
+    second: {fileID: 2100000, guid: cb567b046ed86104e812c8c6593650fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _eardefault
+    second: {fileID: 2100000, guid: 8aebe2f1d4f0f814a85ff113c7f5dde3, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Walking
+      takeName: Take 001
+      firstFrame: 0
+      lastFrame: 36
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Standing
+      takeName: Take 001
+      firstFrame: 37
+      lastFrame: 75
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

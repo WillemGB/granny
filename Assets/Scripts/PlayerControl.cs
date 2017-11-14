@@ -9,8 +9,11 @@ public class PlayerControl : MonoBehaviour {
 	public int characterStrength = 250; 	
 	public string controllerNumber;
 	public int maxSpeed = 6;
+    public float abilityCooldownTime;
 
-	private Rigidbody rigidBody;
+    private float _abilityCooldownTime;
+
+    private Rigidbody rigidBody;
     private Animator grannyAnimator;
 
     private Vector3 moveInput;
@@ -25,6 +28,7 @@ public class PlayerControl : MonoBehaviour {
         if (granny != null) { 
             grannyAnimator = granny.GetComponent<Animator>();
         }
+        _abilityCooldownTime = abilityCooldownTime;
     }
 
 	void Update() {
@@ -33,6 +37,9 @@ public class PlayerControl : MonoBehaviour {
 		moveVelocity = moveInput * moveSpeed;
 
 		walking = moveInput != Vector3.zero;
+
+        if (_abilityCooldownTime > 0)
+	        _abilityCooldownTime -= Time.deltaTime;
 	}
 
 	void FixedUpdate() {
@@ -44,7 +51,9 @@ public class PlayerControl : MonoBehaviour {
 		if(rigidBody.velocity != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rigidBody.velocity.normalized), 0.2f);
 
         Animate();
-        
+
+        if (Input.GetButtonDown("Fire1" + controllerNumber) && _abilityCooldownTime < 0)
+	        PeformPlayerAblity();
 	}
 
 	void OnTriggerStay (Collider other)
@@ -91,4 +100,29 @@ public class PlayerControl : MonoBehaviour {
 		}
 	}
 
+    void PeformPlayerAblity()
+    {
+        // Peform action based on controller number
+        switch (controllerNumber)
+        {
+            case "":
+                Debug.Log("Player 1 peforms ...");
+                break;
+            case "2":
+                Debug.Log("Player 2 peforms ...");
+                break;
+            case "3":
+                Debug.Log("Player 3 peforms ...");
+                break;
+            case "4":
+                Debug.Log("Player 4 peforms dash");
+                rigidBody.AddForce(moveVelocity * 30, ForceMode.Force);
+                break;
+            default:
+                Debug.Log("Default");
+                break;
+        }
+
+        _abilityCooldownTime = abilityCooldownTime;
+    }
 }
