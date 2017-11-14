@@ -22,6 +22,7 @@ public class PlayerControl : MonoBehaviour {
     public GameObject Mond;
 
     public GameObject KunstGebit;
+	public GameObject DiarrheaPrefab;
 
     public float Bullet_Forward_Force;
 
@@ -58,7 +59,7 @@ public class PlayerControl : MonoBehaviour {
 
         Animate();
 
-        if (Input.GetButtonDown("Fire1" + controllerNumber) && _abilityCooldownTime < 0)
+        if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
 	}
 
@@ -117,6 +118,7 @@ public class PlayerControl : MonoBehaviour {
                 break;
             case "2":
                 Debug.Log("Player 2 performs ...");
+				Instantiate (DiarrheaPrefab, new Vector3(this.transform.position.x, this.transform.position.y - 1, this.transform.position.z), Quaternion.identity);
                 break;
             case "3":
                 Debug.Log("Player 3 performs ...");
