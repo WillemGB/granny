@@ -103,8 +103,23 @@ public class PlayerControl : MonoBehaviour {
     {
         if (_abilityCooldownTime < 0)
         {
-            // Peform action (check type?)
-
+            // Peform action based on controller number
+            switch (controllerNumber)
+            {
+                case "":
+                    Debug.Log("Player 1 peforms ...");
+                    break;
+                case "2":
+                    Debug.Log("Player 2 peforms ...");
+                    break;
+                case "3":
+                    Debug.Log("Player 3 peforms ...");
+                    break;
+                case "4":
+                    Debug.Log("Player 4 peforms ...");
+                    break;
+                default: break;
+            }
 
             _abilityCooldownTime = abilityCooldownTime;
         }   
