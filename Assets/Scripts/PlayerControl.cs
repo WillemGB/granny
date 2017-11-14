@@ -163,7 +163,7 @@ public class PlayerControl : MonoBehaviour {
             StopAllCoroutines();
             ResumeFromStun();
         }
-    }
+	}
 
     void shootFakeTeeth()
     {
