@@ -118,11 +118,12 @@ public class PlayerControl : MonoBehaviour {
                 Debug.Log("Player 1 shoots fake teeth!");
                 shootFakeTeeth();
                 break;
-			case "2":
-				Debug.Log ("Player 2 performs ...");
-				var spawnPos = this.transform.position - (transform.forward / 2);  // spawn behind player
-				spawnPos.y = spawnPos.y - 1.2f;
-				Instantiate (DiarrheaPrefab, spawnPos, Quaternion.identity);
+		case "2":
+			Debug.Log ("Player 2 performs ...");
+			var spawnPos = this.transform.position - (transform.forward / 2);  // spawn behind player
+			spawnPos.y = spawnPos.y - 1.2f;
+			var randomRotation = Quaternion.Euler (0, UnityEngine.Random.Range (0, 360), 0);
+			Instantiate (DiarrheaPrefab, spawnPos, randomRotation);
                 break;
             case "3":
                 Debug.Log("Player 3 performs ...");
