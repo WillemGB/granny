@@ -38,8 +38,6 @@ public class PlayerControl : MonoBehaviour {
 
 		walking = moveInput != Vector3.zero;
 
-	    Debug.Log("cooldown: " + _abilityCooldownTime);
-
         if (_abilityCooldownTime > 0)
 	        _abilityCooldownTime -= Time.deltaTime;
 	}
@@ -108,8 +106,7 @@ public class PlayerControl : MonoBehaviour {
         switch (controllerNumber)
         {
             case "":
-                Debug.Log("Player 1 peforms dash");
-
+                Debug.Log("Player 1 peforms ...");
                 break;
             case "2":
                 Debug.Log("Player 2 peforms ...");
@@ -118,7 +115,8 @@ public class PlayerControl : MonoBehaviour {
                 Debug.Log("Player 3 peforms ...");
                 break;
             case "4":
-                Debug.Log("Player 4 peforms ...");
+                Debug.Log("Player 4 peforms dash");
+                rigidBody.AddForce(moveVelocity * 30, ForceMode.Force);
                 break;
             default:
                 Debug.Log("Default");
