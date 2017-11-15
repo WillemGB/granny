@@ -14,6 +14,8 @@ public class PlayerControl : MonoBehaviour {
     public GameObject stunPrefab;
     public float stunTime;
 
+    public GameObject punchPrefab;
+
     private float _abilityCooldownTime;
 
     private Rigidbody rigidBody;
@@ -30,14 +32,11 @@ public class PlayerControl : MonoBehaviour {
     public float Bullet_Forward_Force;
 
     private bool walking;
-    private bool isPushing;
-    float timeSinceLastCall;
 
     void Start()
     {
         rigidBody = GetComponent<Rigidbody>();
         walking = false;
-        isPushing = false;
         if (granny != null) { 
             grannyAnimator = granny.GetComponent<Animator>();
         }
@@ -53,7 +52,7 @@ public class PlayerControl : MonoBehaviour {
 
         if (_abilityCooldownTime > 0)
 	        _abilityCooldownTime -= Time.deltaTime;
-    }
+	}
 
 	void FixedUpdate() {
 		if (Math.Abs(rigidBody.velocity.x) < maxSpeed && Math.Abs(rigidBody.velocity.z) < maxSpeed) {
@@ -62,6 +61,8 @@ public class PlayerControl : MonoBehaviour {
 
 		// slerp model in de richting van beweging
 		if(rigidBody.velocity != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rigidBody.velocity.normalized), 0.2f);
+
+        Animate();
 
         if (_abilityCooldownTime < 0)
         {
@@ -75,26 +76,38 @@ public class PlayerControl : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
-        if(Input.GetButtonDown("Fire1" + controllerNumber))
-            isPushing = true;
 
-        timeSinceLastCall += Time.deltaTime;
-        if (timeSinceLastCall >= 0.33)
-        {
-            isPushing = false;
-            timeSinceLastCall = 0;   // reset timer back to 0
-        }
-
-        Animate();
+	    HandlePullBed(); //Jeroen: werkt alleen als de sphere collider uit staat
     }
 
-	void OnTriggerStay (Collider other)
+    private void HandlePullBed()
+    {
+        if(Input.GetKey(KeyCode.LeftControl)) //pak het bed op als je P ingedrukt houdt
+        {
+            RaycastHit hit;
+            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+
+            if (Physics.Raycast(transform.position, fwd, out hit, 1f))
+            {
+                if (hit.transform.tag == "Bed")
+                {
+                    var fixedJoint = hit.collider.GetComponent<FixedJoint>();
+                    fixedJoint.connectedBody = this.GetComponent<Rigidbody>();
+                }
+            }
+        }
+        else
+        {
+            //Jeroen todo: loskoppelen?
+        }
+    }
+
+    void OnTriggerStay (Collider other)
 	{
 		if (Input.GetButtonDown("Fire1" + controllerNumber) && other.tag == "Player" && other.GetComponent<Rigidbody>() != rigidBody)
 		{
 			Debug.Log("HIT enemy");
 			other.gameObject.GetComponent<Rigidbody> ().AddForce(this.transform.forward * characterStrength, ForceMode.Acceleration);
-           
 		} else if (other.tag == "Interactable" && Input.GetButtonDown("Fire1" + controllerNumber)) {
 			Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
 			foreach (Component com in comps) {
@@ -110,7 +123,6 @@ public class PlayerControl : MonoBehaviour {
         if(granny != null)
         {
             grannyAnimator.SetBool("Walking", walking);
-            grannyAnimator.SetBool("IsPushing", isPushing);
         }
     }
 
@@ -143,14 +155,15 @@ public class PlayerControl : MonoBehaviour {
                 shootFakeTeeth();
                 break;
 		case "2":
-			Debug.Log ("Player 2 performs ...");
+			Debug.Log ("Player 2 shits himself");
 			var spawnPos = this.transform.position - (transform.forward / 2);  // spawn behind player
 			spawnPos.y = spawnPos.y - 1.2f;
 			var randomRotation = Quaternion.Euler (0, UnityEngine.Random.Range (0, 360), 0);
 			Instantiate (DiarrheaPrefab, spawnPos, randomRotation);
                 break;
             case "3":
-                Debug.Log("Player 3 performs ...");
+                Debug.Log("Player 3 punches");
+                Punch();
                 break;
             case "4":
                 Debug.Log("Player 4 performs dash");
@@ -208,5 +221,12 @@ public class PlayerControl : MonoBehaviour {
         Temporary_RigidBody.AddForce(transform.forward * Bullet_Forward_Force);
 
         Destroy(Temporary_Bullet_Handler, 2.0f);
+    }
+
+    void Punch()
+    {
+        var punchHandler = Instantiate(punchPrefab, gameObject.transform);
+
+        Destroy(punchHandler, 1.0f);
     }
 }
