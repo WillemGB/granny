@@ -4,4 +4,5 @@ using UnityEngine;
 
 public interface InteractionInterface {
 	void onUse ();
+	int loot ();
 }

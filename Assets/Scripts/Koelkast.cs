@@ -17,4 +17,8 @@ public class Koelkast : MonoBehaviour, InteractionInterface {
 	public void onUse() {
 		Debug.Log ("using koelkast");
 	}
+
+	public int loot() {
+		return 1;
+	}
 }
