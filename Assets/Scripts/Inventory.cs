@@ -33,33 +33,39 @@ public class Inventory : MonoBehaviour {
 
 	void OnGUI()
     {
-        GUI.skin = skin;
-        if(showInventory)
+        if (skin != null)
         {
-            DrawInventory();
-        }
-        for (int i = 0; i < inventory.Count; i++)
-        {
-            GUI.Label(new Rect(10,i * 20,200,50), inventory[i].itemName);
+            GUI.skin = skin;
+            if (showInventory)
+            {
+                DrawInventory();
+            }
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                GUI.Label(new Rect(10, i * 20, 200, 50), inventory[i].itemName);
+            }
         }
 	}
     void DrawInventory()
     {
-        int i = 0;
-        for(int x = 0; x < slotsX; x++)
+        if (skin != null)
         {
-            for (int y = 0; y < slotsY; y++)
+            int i = 0;
+            for (int x = 0; x < slotsX; x++)
             {
-                Rect slotRect = new Rect(x * 60, y * 60, 50, 50);
-                GUI.Box(slotRect,"", skin.GetStyle("Slot"));
-                slots[i] = inventory[i];
-                if (slots [i].itemName != null)
+                for (int y = 0; y < slotsY; y++)
                 {
-                    GUI.DrawTexture(slotRect,slots[i].itemIcon);
+                    Rect slotRect = new Rect(x * 60, y * 60, 50, 50);
+                    GUI.Box(slotRect, "", skin.GetStyle("Slot"));
+                    slots[i] = inventory[i];
+                    if (slots[i].itemName != null)
+                    {
+                        GUI.DrawTexture(slotRect, slots[i].itemIcon);
+                    }
+
+
+                    i++;
                 }
-
-
-                i++;
             }
         }
     }
