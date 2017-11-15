@@ -19,7 +19,9 @@ public class Inventory : MonoBehaviour {
             inventory.Add(new Item());
         }
         database = GameObject.FindGameObjectWithTag("Item Database").GetComponent<ItemDatabase>();
-        inventory[0] = database.items[0];
+        AddItem(1);
+        AddItem(2);
+        AddItem(3);
 
         
 	}
@@ -42,7 +44,7 @@ public class Inventory : MonoBehaviour {
             }
             for (int i = 0; i < inventory.Count; i++)
             {
-                GUI.Label(new Rect(10, i * 20, 200, 50), inventory[i].itemName);
+            //    GUI.Label(new Rect(10, i * 20, 200, 50), inventory[i].itemName);
             }
         }
 	}
@@ -69,4 +71,29 @@ public class Inventory : MonoBehaviour {
             }
         }
     }
+
+        void AddItem(int id)
+        {
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                if (inventory[i].itemName == null)
+                {
+                    for (int j = 0; j < database.items.Count; j++)
+                    {
+                        if (database.items[j].itemID == id)
+                        {
+                            inventory[i] = database.items[j];
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+   // bool InventoryContains(int id)
+     //   for (int ;i)
+   // {
+
+   // }
+    
 }
