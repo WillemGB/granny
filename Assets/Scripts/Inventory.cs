@@ -7,8 +7,11 @@ public class Inventory : MonoBehaviour {
     public GUISkin skin;
     public List<Item> inventory = new List<Item>();
     public List<Item> slots = new List<Item>();
-    private bool showInventory;
+    private bool showInventory = true;
     private ItemDatabase database;
+
+	public int inventoryXoffset;
+	public int inventoryYoffset;
 
 
     // Use this for initialization
@@ -19,9 +22,7 @@ public class Inventory : MonoBehaviour {
             inventory.Add(new Item());
         }
         database = GameObject.FindGameObjectWithTag("Item Database").GetComponent<ItemDatabase>();
-        AddItem(1);
-        AddItem(2);
-        AddItem(3);
+        
 
         
 	}
@@ -57,7 +58,7 @@ public class Inventory : MonoBehaviour {
             {
                 for (int y = 0; y < slotsY; y++)
                 {
-                    Rect slotRect = new Rect(x * 60, y * 60, 50, 50);
+					Rect slotRect = new Rect(x * 60 + inventoryXoffset, y * 60 + inventoryYoffset, 50, 50);
                     GUI.Box(slotRect, "", skin.GetStyle("Slot"));
                     slots[i] = inventory[i];
                     if (slots[i].itemName != null)
@@ -72,7 +73,7 @@ public class Inventory : MonoBehaviour {
         }
     }
 
-        void AddItem(int id)
+        public void AddItem(int id)
         {
             for (int i = 0; i < inventory.Count; i++)
             {

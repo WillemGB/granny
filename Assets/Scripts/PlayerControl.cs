@@ -11,6 +11,8 @@ public class PlayerControl : MonoBehaviour {
     public float abilityCooldownTime;
     public GameObject canUseAbility;
 
+	public Inventory inventory;
+
     public GameObject stunPrefab;
     public float stunTime;
 
@@ -127,6 +129,16 @@ public class PlayerControl : MonoBehaviour {
 			foreach (Component com in comps) {
 				var interactableScript = com as InteractionInterface;
 				interactableScript.onUse ();
+				var itemId = interactableScript.loot();
+				if ((controllerNumber == "" || controllerNumber == "2") && itemId == 1) {
+					inventory.AddItem (itemId);
+					interactableScript.removeLoot();
+					Debug.Log ("key 1 opgepakt");
+				} else if ((controllerNumber == "3" || controllerNumber == "4") && itemId == 2) {
+					inventory.AddItem (itemId);
+					interactableScript.removeLoot();
+					Debug.Log ("key 2 opgepakt");
+				}
 			}
 		}
 	}
