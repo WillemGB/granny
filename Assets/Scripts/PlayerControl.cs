@@ -107,7 +107,7 @@ public class PlayerControl : MonoBehaviour {
     void Animate()
     {
         //Debug.Log("ani:" + walking);
-        if(granny != null)
+        if (granny != null && grannyAnimator != null)
         {
             grannyAnimator.SetBool("Walking", walking);
             grannyAnimator.SetBool("IsPushing", isPushing);
