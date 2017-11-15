@@ -172,12 +172,9 @@ public class PlayerControl : MonoBehaviour {
                 Debug.Log("Player 1 shoots fake teeth!");
                 shootFakeTeeth();
                 break;
-		case "2":
-			Debug.Log ("Player 2 shits himself");
-			var spawnPos = this.transform.position - (transform.forward / 2);  // spawn behind player
-			spawnPos.y = spawnPos.y - 1.2f;
-			var randomRotation = Quaternion.Euler (0, UnityEngine.Random.Range (0, 360), 0);
-			Instantiate (DiarrheaPrefab, spawnPos, randomRotation);
+			case "2":
+				Debug.Log ("Player 2 shits himself");
+				Defecate ();
                 break;
             case "3":
                 Debug.Log("Player 3 punches");
@@ -194,6 +191,13 @@ public class PlayerControl : MonoBehaviour {
 
         _abilityCooldownTime = abilityCooldownTime;
     }
+
+	private void Defecate() {
+		var spawnPos = this.transform.position - (transform.forward / 2);  // spawn behind player
+		spawnPos.y = spawnPos.y - 1.2f;
+		var randomRotation = Quaternion.Euler (0, UnityEngine.Random.Range (0, 360), 0);
+		Instantiate (DiarrheaPrefab, spawnPos, randomRotation);
+	}
 
     public void Stun()
     {
@@ -245,6 +249,6 @@ public class PlayerControl : MonoBehaviour {
     {
         var punchHandler = Instantiate(punchPrefab, gameObject.transform);
 
-        Destroy(punchHandler, 1.0f);
+        Destroy(punchHandler, 0.5f);
     }
 }
