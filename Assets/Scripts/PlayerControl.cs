@@ -140,18 +140,21 @@ public class PlayerControl : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Interactable") {
-			Component[] comps = other.gameObject.GetComponents (typeof(InteractionInterface));
-			if (comps.Length > 0) {
-				other.GetComponent<Renderer> ().material.shader = Shader.Find ("Outlined/SilhouettedDiffuseTexture");
+			foreach (Renderer objectRenderer in other.GetComponentsInChildren<Renderer>()) {
+				foreach (Material mat in objectRenderer.materials) {
+					mat.shader = Shader.Find ("Outlined/SilhouettedDiffuseTexture");
+				}
 			}
+
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
 		if (other.tag == "Interactable") {
-			Component[] comps = other.gameObject.GetComponents (typeof(InteractionInterface));
-			if (comps.Length > 0) {
-				other.GetComponent<Renderer> ().material.shader = Shader.Find("Diffuse");
+			foreach (Renderer objectRenderer in other.GetComponentsInChildren<Renderer>()) {
+				foreach (Material mat in objectRenderer.materials) {
+					mat.shader = Shader.Find ("Diffuse");
+				}
 			}
 		}
 	}
