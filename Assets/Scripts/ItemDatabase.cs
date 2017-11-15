@@ -10,6 +10,7 @@ public class ItemDatabase : MonoBehaviour {
     void Start()
     {
         items.Add(new Item("Apple",0,"een appel", 2 ,0, Item.ItemType.Power));
+        items.Add(new Item("Key", 0, "een sleutel", 2, 0, Item.ItemType.Key));
     }
     
 }
