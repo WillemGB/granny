@@ -185,16 +185,16 @@ public class PlayerControl : MonoBehaviour {
                 shootFakeTeeth();
                 break;
 			case "2":
-				Debug.Log ("Player 2 shits himself");
-				Defecate ();
+				Debug.Log("Player 2 performs dash");
+				rigidBody.AddForce(moveVelocity * 75, ForceMode.Force);
                 break;
             case "3":
                 Debug.Log("Player 3 punches");
                 Punch();
                 break;
             case "4":
-                Debug.Log("Player 4 performs dash");
-                rigidBody.AddForce(moveVelocity * 75, ForceMode.Force);
+				Debug.Log ("Player 4 shits himself");
+				Defecate ();
                 break;
             default:
                 Debug.Log("Default");
