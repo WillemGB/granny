@@ -32,6 +32,8 @@ public class PlayerControl : MonoBehaviour {
     public float Bullet_Forward_Force;
 
     private bool walking;
+    private float timeSinceLastCall;
+    private bool isPushing;
 
     void Start()
     {
@@ -62,8 +64,6 @@ public class PlayerControl : MonoBehaviour {
 		// slerp model in de richting van beweging
 		if(rigidBody.velocity != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rigidBody.velocity.normalized), 0.2f);
 
-        Animate();
-
         if (_abilityCooldownTime < 0)
         {
 
@@ -76,8 +76,22 @@ public class PlayerControl : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
+        if (Input.GetButtonDown("Fire1" + controllerNumber))
+        {
+            print("push");
+            isPushing = true;
+        }
 
-	    HandlePullBed(); //Jeroen: werkt alleen als de sphere collider uit staat
+        timeSinceLastCall += Time.deltaTime;
+        if (timeSinceLastCall >= 0.33)
+        {
+            isPushing = false;
+            timeSinceLastCall = 0;   // reset timer back to 0
+        }
+
+        HandlePullBed(); //Jeroen: werkt alleen als de sphere collider uit staat
+
+        Animate();
     }
 
     private void HandlePullBed()
@@ -120,8 +134,9 @@ public class PlayerControl : MonoBehaviour {
     void Animate()
     {
         //Debug.Log("ani:" + walking);
-        if(granny != null)
+        if (granny != null && grannyAnimator != null)
         {
+            grannyAnimator.SetBool("IsPushing",isPushing);
             grannyAnimator.SetBool("Walking", walking);
         }
     }
@@ -129,18 +144,21 @@ public class PlayerControl : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Interactable") {
-			Component[] comps = other.gameObject.GetComponents (typeof(InteractionInterface));
-			if (comps.Length > 0) {
-				other.GetComponent<Renderer> ().material.shader = Shader.Find ("Outlined/SilhouettedDiffuseTexture");
+			foreach (Renderer objectRenderer in other.GetComponentsInChildren<Renderer>()) {
+				foreach (Material mat in objectRenderer.materials) {
+					mat.shader = Shader.Find ("Outlined/SilhouettedDiffuseTexture");
+				}
 			}
+
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
 		if (other.tag == "Interactable") {
-			Component[] comps = other.gameObject.GetComponents (typeof(InteractionInterface));
-			if (comps.Length > 0) {
-				other.GetComponent<Renderer> ().material.shader = Shader.Find("Diffuse");
+			foreach (Renderer objectRenderer in other.GetComponentsInChildren<Renderer>()) {
+				foreach (Material mat in objectRenderer.materials) {
+					mat.shader = Shader.Find ("Diffuse");
+				}
 			}
 		}
 	}
