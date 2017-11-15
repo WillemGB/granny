@@ -13,6 +13,8 @@ public class GameManagerControl : MonoBehaviour
     public PlayerControl Player3ControllerScript;
     public PlayerControl Player4ControllerScript;
 
+	private AudioSource backgroundMusic;
+
     private float _countDownTime = 4.0f;
 
     void Awake()
@@ -26,7 +28,7 @@ public class GameManagerControl : MonoBehaviour
 
         // Init the canvas controller
         CanvasControllerScript = FindObjectOfType<CanvasController>();
-
+		backgroundMusic = GetComponent<AudioSource> ();
 		if (!debugging) {
 	        // Freeze player Scripts
 	        DisableScripts();
@@ -35,6 +37,8 @@ public class GameManagerControl : MonoBehaviour
 	        CanvasControllerScript.StartCountdown(_countDownTime);
 	        StartCoroutine(this.WaitForCountdown());
 		}
+
+		backgroundMusic.Play ();
     }
 
     // Waits for a async countdown

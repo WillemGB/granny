@@ -19,6 +19,8 @@ public class Koelkast : MonoBehaviour, InteractionInterface {
 	}
 
 	public int loot() {
-		return 1;
+		return 2;
 	}
+
+	public void removeLoot() { }
 }

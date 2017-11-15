@@ -22,8 +22,10 @@ public class FallingBookCase : MonoBehaviour, InteractionInterface
         Debug.Log("pushing bookcase");
     }
 
-    public int loot()
-    {
-        return -1;
-    }
+	public int loot() {
+		return 0;
+	}
+
+	public void removeLoot () { }
+
 }
