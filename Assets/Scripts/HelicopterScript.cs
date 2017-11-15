@@ -39,7 +39,7 @@ public class HelicopterScript : MonoBehaviour
             playerRigidbody.isKinematic = true;
 
             PlayerControl playertje = collision.other.GetComponent<PlayerControl>();
-            playertje.isInEndScene = true;
+            // playertje.isInEndScene = true;
 
             audioSource = GetComponent<AudioSource>();
             audioSource.clip = epicSound;
