@@ -76,8 +76,11 @@ public class PlayerControl : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
-        if(Input.GetButtonDown("Fire1" + controllerNumber))
+        if (Input.GetButtonDown("Fire1" + controllerNumber))
+        {
+            print("push");
             isPushing = true;
+        }
 
         timeSinceLastCall += Time.deltaTime;
         if (timeSinceLastCall >= 0.33)
@@ -133,6 +136,7 @@ public class PlayerControl : MonoBehaviour {
         //Debug.Log("ani:" + walking);
         if (granny != null && grannyAnimator != null)
         {
+            grannyAnimator.SetBool("IsPushing",isPushing);
             grannyAnimator.SetBool("Walking", walking);
         }
     }
