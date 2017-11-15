@@ -11,8 +11,12 @@ public class PlayerControl : MonoBehaviour {
     public float abilityCooldownTime;
     public GameObject canUseAbility;
 
+	public Inventory inventory;
+
     public GameObject stunPrefab;
     public float stunTime;
+
+    public GameObject punchPrefab;
 
     private float _abilityCooldownTime;
 
@@ -30,6 +34,8 @@ public class PlayerControl : MonoBehaviour {
     public float Bullet_Forward_Force;
 
     private bool walking;
+    private float timeSinceLastCall;
+    private bool isPushing;
 
     void Start()
     {
@@ -60,8 +66,6 @@ public class PlayerControl : MonoBehaviour {
 		// slerp model in de richting van beweging
 		if(rigidBody.velocity != Vector3.zero) transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(rigidBody.velocity.normalized), 0.2f);
 
-        Animate();
-
         if (_abilityCooldownTime < 0)
         {
 
@@ -74,9 +78,47 @@ public class PlayerControl : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
-	}
+        if (Input.GetButtonDown("Fire1" + controllerNumber))
+        {
+            print("push");
+            isPushing = true;
+        }
 
-	void OnTriggerStay (Collider other)
+        timeSinceLastCall += Time.deltaTime;
+        if (timeSinceLastCall >= 0.33)
+        {
+            isPushing = false;
+            timeSinceLastCall = 0;   // reset timer back to 0
+        }
+
+        HandlePullBed(); //Jeroen: werkt alleen als de sphere collider uit staat
+
+        Animate();
+    }
+
+    private void HandlePullBed()
+    {
+        if(Input.GetKey(KeyCode.LeftControl)) //pak het bed op als je P ingedrukt houdt
+        {
+            RaycastHit hit;
+            Vector3 fwd = transform.TransformDirection(Vector3.forward);
+
+            if (Physics.Raycast(transform.position, fwd, out hit, 1f))
+            {
+                if (hit.transform.tag == "Bed")
+                {
+                    var fixedJoint = hit.collider.GetComponent<FixedJoint>();
+                    fixedJoint.connectedBody = this.GetComponent<Rigidbody>();
+                }
+            }
+        }
+        else
+        {
+            //Jeroen todo: loskoppelen?
+        }
+    }
+
+    void OnTriggerStay (Collider other)
 	{
 		if (Input.GetButtonDown("Fire1" + controllerNumber) && other.tag == "Player" && other.GetComponent<Rigidbody>() != rigidBody)
 		{
@@ -87,6 +129,16 @@ public class PlayerControl : MonoBehaviour {
 			foreach (Component com in comps) {
 				var interactableScript = com as InteractionInterface;
 				interactableScript.onUse ();
+				var itemId = interactableScript.loot();
+				if ((controllerNumber == "" || controllerNumber == "2") && itemId == 1) {
+					inventory.AddItem (itemId);
+					interactableScript.removeLoot();
+					Debug.Log ("key 1 opgepakt");
+				} else if ((controllerNumber == "3" || controllerNumber == "4") && itemId == 2) {
+					inventory.AddItem (itemId);
+					interactableScript.removeLoot();
+					Debug.Log ("key 2 opgepakt");
+				}
 			}
 		}
 	}
@@ -94,8 +146,9 @@ public class PlayerControl : MonoBehaviour {
     void Animate()
     {
         //Debug.Log("ani:" + walking);
-        if(granny != null)
+        if (granny != null && grannyAnimator != null)
         {
+            grannyAnimator.SetBool("IsPushing",isPushing);
             grannyAnimator.SetBool("Walking", walking);
         }
     }
@@ -103,18 +156,21 @@ public class PlayerControl : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 		if (other.tag == "Interactable") {
-			Component[] comps = other.gameObject.GetComponents (typeof(InteractionInterface));
-			if (comps.Length > 0) {
-				other.GetComponent<Renderer> ().material.shader = Shader.Find ("Outlined/SilhouettedDiffuseTexture");
+			foreach (Renderer objectRenderer in other.GetComponentsInChildren<Renderer>()) {
+				foreach (Material mat in objectRenderer.materials) {
+					mat.shader = Shader.Find ("Outlined/SilhouettedDiffuseTexture");
+				}
 			}
+
 		}
 	}
 
 	void OnTriggerExit(Collider other) {
 		if (other.tag == "Interactable") {
-			Component[] comps = other.gameObject.GetComponents (typeof(InteractionInterface));
-			if (comps.Length > 0) {
-				other.GetComponent<Renderer> ().material.shader = Shader.Find("Diffuse");
+			foreach (Renderer objectRenderer in other.GetComponentsInChildren<Renderer>()) {
+				foreach (Material mat in objectRenderer.materials) {
+					mat.shader = Shader.Find ("Diffuse");
+				}
 			}
 		}
 	}
@@ -128,15 +184,13 @@ public class PlayerControl : MonoBehaviour {
                 Debug.Log("Player 1 shoots fake teeth!");
                 shootFakeTeeth();
                 break;
-		case "2":
-			Debug.Log ("Player 2 performs ...");
-			var spawnPos = this.transform.position - (transform.forward / 2);  // spawn behind player
-			spawnPos.y = spawnPos.y - 1.2f;
-			var randomRotation = Quaternion.Euler (0, UnityEngine.Random.Range (0, 360), 0);
-			Instantiate (DiarrheaPrefab, spawnPos, randomRotation);
+			case "2":
+				Debug.Log ("Player 2 shits himself");
+				Defecate ();
                 break;
             case "3":
-                Debug.Log("Player 3 performs ...");
+                Debug.Log("Player 3 punches");
+                Punch();
                 break;
             case "4":
                 Debug.Log("Player 4 performs dash");
@@ -149,6 +203,13 @@ public class PlayerControl : MonoBehaviour {
 
         _abilityCooldownTime = abilityCooldownTime;
     }
+
+	private void Defecate() {
+		var spawnPos = this.transform.position - (transform.forward / 2);  // spawn behind player
+		spawnPos.y = spawnPos.y - 1.2f;
+		var randomRotation = Quaternion.Euler (0, UnityEngine.Random.Range (0, 360), 0);
+		Instantiate (DiarrheaPrefab, spawnPos, randomRotation);
+	}
 
     public void Stun()
     {
@@ -194,5 +255,12 @@ public class PlayerControl : MonoBehaviour {
         Temporary_RigidBody.AddForce(transform.forward * Bullet_Forward_Force);
 
         Destroy(Temporary_Bullet_Handler, 2.0f);
+    }
+
+    void Punch()
+    {
+        var punchHandler = Instantiate(punchPrefab, gameObject.transform);
+
+        Destroy(punchHandler, 0.5f);
     }
 }
