@@ -32,6 +32,8 @@ public class PlayerControl : MonoBehaviour {
     public float Bullet_Forward_Force;
 
     private bool walking;
+    private float timeSinceLastCall;
+    private bool isPushing;
 
     void Start()
     {
@@ -74,7 +76,7 @@ public class PlayerControl : MonoBehaviour {
 
         if (Input.GetButtonDown("Fire2" + controllerNumber) && _abilityCooldownTime < 0)
 	        PerformPlayerAbility();
- if(Input.GetButtonDown("Fire1" + controllerNumber))
+        if(Input.GetButtonDown("Fire1" + controllerNumber))
             isPushing = true;
 
         timeSinceLastCall += Time.deltaTime;
@@ -84,8 +86,9 @@ public class PlayerControl : MonoBehaviour {
             timeSinceLastCall = 0;   // reset timer back to 0
         }
 
+        HandlePullBed(); //Jeroen: werkt alleen als de sphere collider uit staat
+
         Animate();
-	    HandlePullBed(); //Jeroen: werkt alleen als de sphere collider uit staat
     }
 
     private void HandlePullBed()
