@@ -27,4 +27,6 @@ public class FallingBookCase : MonoBehaviour, InteractionInterface
 		return 0;
 	}
 
+	public void removeLoot () { }
+
 }
