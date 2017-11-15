@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour {
     public int slotsX, slotsY;
+    public GUISkin skin;
     public List<Item> inventory = new List<Item>();
     public List<Item> slots = new List<Item>();
     private bool showInventory;
@@ -15,14 +16,10 @@ public class Inventory : MonoBehaviour {
         for (int i = 0; i < (slotsX * slotsY); i++)
         {
             slots.Add(new Item());
+            inventory.Add(new Item());
         }
         database = GameObject.FindGameObjectWithTag("Item Database").GetComponent<ItemDatabase>();
-        print(inventory.Count);
-        inventory.Add(database.items[0]);
-        inventory.Add(database.items[1]);
-        inventory.Add(database.items[0]);
-        inventory.Add(database.items[1]);
-        print(inventory[0].itemName);
+        inventory[0] = database.items[0];
 
         
 	}
@@ -36,6 +33,7 @@ public class Inventory : MonoBehaviour {
 
 	void OnGUI()
     {
+        GUI.skin = skin;
         if(showInventory)
         {
             DrawInventory();
@@ -47,11 +45,21 @@ public class Inventory : MonoBehaviour {
 	}
     void DrawInventory()
     {
+        int i = 0;
         for(int x = 0; x < slotsX; x++)
         {
             for (int y = 0; y < slotsY; y++)
             {
-                GUI.Box(new Rect(x * 20, y * 20, 20,20), y.ToString());
+                Rect slotRect = new Rect(x * 60, y * 60, 50, 50);
+                GUI.Box(slotRect,"", skin.GetStyle("Slot"));
+                slots[i] = inventory[i];
+                if (slots [i].itemName != null)
+                {
+                    GUI.DrawTexture(slotRect,slots[i].itemIcon);
+                }
+
+
+                i++;
             }
         }
     }
