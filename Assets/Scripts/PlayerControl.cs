@@ -245,6 +245,6 @@ public class PlayerControl : MonoBehaviour {
     {
         var punchHandler = Instantiate(punchPrefab, gameObject.transform);
 
-        Destroy(punchHandler, 1.0f);
+        Destroy(punchHandler, 0.5f);
     }
 }
