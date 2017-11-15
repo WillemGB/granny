@@ -16,15 +16,14 @@ public class FallingBookCase : MonoBehaviour, InteractionInterface
 	void Update () {
 		
 	}
-
     public void onUse()
     {
         animator.SetBool("Fall", true);
         Debug.Log("pushing bookcase");
     }
 
-	public int loot() {
-		return 0;
-	}
-
+    public int loot()
+    {
+        return -1;
+    }
 }
