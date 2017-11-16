@@ -2,33 +2,21 @@
 using UnityEngine.UI;
 
 public class StartMenuCanvasScript : MonoBehaviour {
-    public Image BackgroundImage;
-    public Button StartButton;
-    public Button SettingsButton;
-    public Button BackButton;
+    public Image PressAKey;
 
-	// Use this for initialization
-	void Start () {
-        StartButton = StartButton.GetComponent<Button>();    	
-        SettingsButton = SettingsButton.GetComponent<Button>();    	
-        BackButton = BackButton.GetComponent<Button>();
+    private Vector3 maxVector3 = new Vector3(1.01f, 1.1f, 1.1f);
+    private Vector3 minVector3 = new Vector3(0.9f, 0.9f, 0.9f);
 
-        // Only show back button in store
-        BackButton.enabled = false;
-	}
-	
-    public void StartGame()
+    private float tranformScale = 1.01f;
+    void FixedUpdate()
     {
-        Application.LoadLevel(1);
-    }
-
-    public void ShowSettingsMenu()
-    {
-
-    }
-
-    public void ShowStartMenu()
-    {
+        if (PressAKey.transform.localScale.x >= maxVector3.x)
+            tranformScale = 0.994f;
         
+        if (PressAKey.transform.localScale.x <= minVector3.x)
+            tranformScale = 1.005f;
+        
+        PressAKey.transform.localScale = PressAKey.transform.localScale * tranformScale;
     }
+
 }
