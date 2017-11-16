@@ -106,6 +106,7 @@ public class CanvasController : MonoBehaviour
             }
 
             CountdownImage.sprite = StartSprite;
+            CountdownImage.transform.localScale *= 1.8f;
             _countdownActive = false;
         }
         else if (_countdownSeconds < 2.0f)
