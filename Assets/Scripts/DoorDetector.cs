@@ -6,25 +6,13 @@ public class DoorDetector : MonoBehaviour {
 
     public int detectorNumber;
     public GameObject detector;
-    Material m_Material;
-
-
-    // Use this for initialization
-    void Start () {
-        m_Material = GetComponent<Renderer>().material;
-    }
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
 
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
-            m_Material.color = Color.green;
-            detector.GetComponent<DoorDetectorController>().isOnDetector(detectorNumber);
+            var teamNumber = other.GetComponent<PlayerControl>().team;
+            detector.GetComponent<DoorDetectorController>().isOnDetector(detectorNumber, teamNumber);
         }
     }
 
@@ -32,8 +20,8 @@ public class DoorDetector : MonoBehaviour {
     {
         if(other.tag == "Player")
         {
-            m_Material.color = Color.yellow;
-            detector.GetComponent<DoorDetectorController>().isNotOnDetector(detectorNumber);
+            var teamNumber = other.GetComponent<PlayerControl>().team;
+            detector.GetComponent<DoorDetectorController>().isNotOnDetector(detectorNumber, teamNumber);
         }
     }
 }

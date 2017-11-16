@@ -6,9 +6,13 @@ public class DoorDetectorController : MonoBehaviour {
 
     public GameObject detector1;
     public GameObject detector2;
-    public GameObject door;
+    public GameObject doorTeam1;
+    public GameObject doorTeam2;
 
-    bool[] detectorArray = new bool[] { false, false};
+    bool[] detectorArrayTeamOne = new bool[] { false, false};
+    bool[] detectorArrayTeamTwo = new bool[] { false, false};
+
+
 
     // Use this for initialization
     void Start () {
@@ -22,35 +26,50 @@ public class DoorDetectorController : MonoBehaviour {
 		
 	}
 
-    void CheckForAllDetectors()
+    void CheckForAllDetectors(int teamNumber)
     {
-        bool isBusy = true;
-        for (int i = 0; i < detectorArray.Length; i++)
+        bool isBusyOne = true;
+        bool isBusyTwo = true;
+        for (int i = 0; i < detectorArrayTeamOne.Length; i++)
         {
-            if (!detectorArray[i])
+            if (!detectorArrayTeamOne[i])
             {
-                isBusy = false;
+                isBusyOne = false;
+            }
+        }
+
+        foreach(bool busy in detectorArrayTeamTwo)
+        {
+            if (!busy)
+            {
+                isBusyTwo = false;
             }
         }
 
         //Open the door!
-        if (isBusy)
+        if (isBusyOne)
         {
-            door.GetComponent<DoorScript>().openDetectedDoor();
+            doorTeam1.GetComponent<DoorScript>().openDetectedDoor();
         }
+        if (isBusyTwo)
+            doorTeam2.GetComponent<DoorScript>().openDetectedDoor();
     }
 
-    public void isOnDetector(int number)
+    public void isOnDetector(int number, int teamNumber)
     {
-        detectorArray[number] = true;
-        print("dec" +number);
+        if (teamNumber == 1)
+            detectorArrayTeamOne[number] = true;
+        if (teamNumber == 2)
+            detectorArrayTeamTwo[number] = true;
 
-        CheckForAllDetectors();
+        CheckForAllDetectors(teamNumber);
     }
 
-    public void isNotOnDetector(int number)
+    public void isNotOnDetector(int number, int teamNumber)
     {
-        detectorArray[number] = false;
-        print("notdec" + number);
+        if (teamNumber == 1) 
+            detectorArrayTeamOne[number] = false;
+        if (teamNumber == 2) 
+            detectorArrayTeamTwo[number] = false;
     }
 }
