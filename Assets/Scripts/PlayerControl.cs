@@ -36,6 +36,7 @@ public class PlayerControl : MonoBehaviour {
     public float Bullet_Forward_Force;
 
     private AudioSource audioSource;
+	private AudioSource gogogoAudio;
 
     private bool walking;
     private float timeSinceLastCall;
@@ -50,7 +51,8 @@ public class PlayerControl : MonoBehaviour {
         }
         _abilityCooldownTime = -0.1F;
 
-        audioSource = GetComponent<AudioSource>();
+		audioSource = GetComponents<AudioSource> () [0];
+		gogogoAudio = GetComponents<AudioSource> () [1];
     }
 
 	void Update() {
@@ -115,10 +117,12 @@ public class PlayerControl : MonoBehaviour {
 				if ((controllerNumber == "" || controllerNumber == "2") && itemId == 1) {
 					inventory.AddItem (itemId);
 					interactableScript.removeLoot();
+					gogogoAudio.Play ();
 					Debug.Log ("key 1 opgepakt");
 				} else if ((controllerNumber == "3" || controllerNumber == "4") && itemId == 2) {
 					inventory.AddItem (itemId);
 					interactableScript.removeLoot();
+					gogogoAudio.Play ();
 					Debug.Log ("key 2 opgepakt");
 				}
 			}
