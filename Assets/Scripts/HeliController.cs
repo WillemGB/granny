@@ -9,6 +9,8 @@ public class HeliController : MonoBehaviour {
     public GameObject heliCam;
     public GameObject parent;
     public GameObject gameManager;
+
+	public GameObject explosions;
    
 	// Use this for initialization
 	void Start () {
@@ -30,6 +32,7 @@ public class HeliController : MonoBehaviour {
         {
             Debug.Log("player in Heli");
 
+			Invoke("startExplosions", 1.5f);
            
             collision.other.gameObject.active = false;
             grannyHeli.active = true;
@@ -48,4 +51,8 @@ public class HeliController : MonoBehaviour {
 
         }
     }
+
+	void startExplosions() {
+		explosions.SetActive (true);
+	}
 }
