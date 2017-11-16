@@ -38,6 +38,8 @@ public class PlayerControl : MonoBehaviour {
     private AudioSource audioSource;
 	private AudioSource gogogoAudio;
 
+	public AudioClip pushThatShitAudio;
+
     private bool walking;
     private float timeSinceLastCall;
     private bool isPushing;
@@ -107,6 +109,10 @@ public class PlayerControl : MonoBehaviour {
 		if (Input.GetButtonDown("Fire1" + controllerNumber) && other.tag == "Player" && other.GetComponent<Rigidbody>() != rigidBody)
 		{
 			Debug.Log("HIT enemy");
+
+			var newSource = gameObject.AddComponent<AudioSource> ();
+			newSource.clip = pushThatShitAudio;
+			newSource.Play ();
 			other.gameObject.GetComponent<Rigidbody> ().AddForce(this.transform.forward * characterStrength, ForceMode.Acceleration);
 		} else if (other.tag == "Interactable" && Input.GetButtonDown("Fire1" + controllerNumber)) {
 			Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
