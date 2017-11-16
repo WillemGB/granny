@@ -13,6 +13,9 @@ public class DoorDetector : MonoBehaviour {
         {
             var teamNumber = other.GetComponent<PlayerControl>().team;
             detector.GetComponent<DoorDetectorController>().isOnDetector(detectorNumber, teamNumber);
+
+            var audio = GetComponent<AudioSource>();
+            audio.Play();
         }
     }
 
