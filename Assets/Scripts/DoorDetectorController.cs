@@ -13,10 +13,14 @@ public class DoorDetectorController : MonoBehaviour {
     bool[] detectorArrayTeamTwo = new bool[] { false, false};
 
     private AudioSource audioSource;
+	private AudioSource team1GoAudio;
+	private AudioSource team2GoAudio;
 
     // Use this for initialization
     void Start () {
-        audioSource = GetComponent<AudioSource>();
+        audioSource = GetComponents<AudioSource>()[0];
+		team1GoAudio = GetComponents<AudioSource>()[1];
+		team2GoAudio = GetComponents<AudioSource>()[2];
     }
 	
 
@@ -49,11 +53,13 @@ public class DoorDetectorController : MonoBehaviour {
         if (isBusyOne)
         {
             audioSource.Play();
+			team1GoAudio.Play ();
             doorTeam1.GetComponent<DoorScript>().openDetectedDoor();
         }
         if (isBusyTwo)
         {
             audioSource.Play();
+			team2GoAudio.Play();
             doorTeam2.GetComponent<DoorScript>().openDetectedDoor();
         }
     }
