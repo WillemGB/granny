@@ -19,7 +19,7 @@ public class HeliSoundScript : MonoBehaviour {
 	void Update () {
         if (musicIsPlaying)
         {
-            Debug.Log("vol:" + startSound);
+
             if (startSound <= 1.0f)
             {
                 sound.volume = startSound;
@@ -30,7 +30,6 @@ public class HeliSoundScript : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("trigger");
         if(!musicIsPlaying && other.tag == "Player")
         {
             musicIsPlaying = true;
