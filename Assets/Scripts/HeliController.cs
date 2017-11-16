@@ -17,7 +17,7 @@ public class HeliController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-            if (parent.transform.position.y > 6.8f && parent.transform.position.y < 7.38f)
+            if (parent.transform.position.y > 15.0f && parent.transform.position.y < 15.58f)
                 Time.timeScale = 0.2F;
             else
                 Time.timeScale = 1.0F;
