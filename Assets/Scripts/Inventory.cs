@@ -28,10 +28,10 @@ public class Inventory : MonoBehaviour {
 	}
     void Update()
     {
-        if (Input.GetButtonDown("Inventory"))
-        {
-            showInventory = !showInventory;
-        }
+        //if (Input.GetButtonDown("Inventory"))
+        //{
+            //showInventory = !showInventory;
+        //}
     }
 
 	void OnGUI()
