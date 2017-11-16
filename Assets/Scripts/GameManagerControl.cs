@@ -13,6 +13,14 @@ public class GameManagerControl : MonoBehaviour
     public PlayerControl Player3ControllerScript;
     public PlayerControl Player4ControllerScript;
 
+    public GameObject cam1;
+    public GameObject cam2;
+    public GameObject cam3;
+    public GameObject cam4;
+    public GameObject camHeli;
+
+    public AudioClip endSound;
+
 	private AudioSource backgroundMusic;
 
     private float _countDownTime = 4.0f;
@@ -70,5 +78,20 @@ public class GameManagerControl : MonoBehaviour
         Player2ControllerScript.enabled = false;
         Player3ControllerScript.enabled = false;
         Player4ControllerScript.enabled = false;
+    }
+
+    public void startEndSound()
+    {
+        backgroundMusic.clip = endSound;
+        backgroundMusic.Play();
+    }
+
+    public void setHeliCam()
+    {
+        cam1.active = false;
+        cam2.active = false;
+        cam3.active = false;
+        cam4.active = false;
+        camHeli.active = true;
     }
 }

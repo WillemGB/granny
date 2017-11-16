@@ -18,27 +18,8 @@ public class CameraController : MonoBehaviour {
 	}
 
 	void LateUpdate () {
-        if (followPlayer)
         {
             transform.position = player.transform.position + offset;
         }
-        else
-        {
-            //transform.position = heli.transform.position + offsetHeli;
-
-            //ar horizontalTurn = 1;// Input.GetAxisRaw(5);
-
-           // transform.Rotate(Mathf.Round(horizontalTurn) * 1.0f, 0.0f,0.0f);
-
-        }
 	}
-
-    public void followHeli()
-    {
-        Debug.Log("cameraFollowPlayer");
-        followPlayer = false;
-
-        GetComponent<Animator>().SetBool("FollowHeli", true);
-
-    }
 }
