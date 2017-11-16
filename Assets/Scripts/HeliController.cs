@@ -6,9 +6,11 @@ public class HeliController : MonoBehaviour {
 
 
     public GameObject grannyHeli;
-    public GameObject cam1;
+    public GameObject heliCam;
     public GameObject parent;
     public GameObject gameManager;
+
+	public GameObject explosions;
    
 	// Use this for initialization
 	void Start () {
@@ -17,7 +19,7 @@ public class HeliController : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-            if (parent.transform.position.y > 6.8f && parent.transform.position.y < 7.38f)
+            if (parent.transform.position.y > 15.0f && parent.transform.position.y < 15.58f)
                 Time.timeScale = 0.2F;
             else
                 Time.timeScale = 1.0F;
@@ -30,6 +32,7 @@ public class HeliController : MonoBehaviour {
         {
             Debug.Log("player in Heli");
 
+			Invoke("startExplosions", 1.5f);
            
             collision.other.gameObject.active = false;
             grannyHeli.active = true;
@@ -37,13 +40,19 @@ public class HeliController : MonoBehaviour {
             Animator animatorParent = parent.GetComponent<Animator>();
             animatorParent.SetBool("startHeli", true);
 
-            cam1.GetComponent<CameraController>().followHeli();
+            gameManager.GetComponent<GameManagerControl>().startEndSound();
+            gameManager.GetComponent<GameManagerControl>().setHeliCam();
+
+            heliCam.GetComponent<CameraHeliController>().followHeli();
 
             //start epic end sound
-            gameManager.GetComponent<GameManagerControl>().startEndSound();
 
 
 
         }
     }
+
+	void startExplosions() {
+		explosions.SetActive (true);
+	}
 }

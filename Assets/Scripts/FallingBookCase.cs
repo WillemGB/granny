@@ -16,7 +16,7 @@ public class FallingBookCase : MonoBehaviour, InteractionInterface
 	void Update () {
 		
 	}
-    public void onUseStart(GameObject usedBy)
+    public void onUse(GameObject usedBy)
     {
         animator.SetBool("Fall", true);
         Debug.Log("pushing bookcase");
@@ -27,8 +27,4 @@ public class FallingBookCase : MonoBehaviour, InteractionInterface
 	}
 
 	public void removeLoot () { }
-
-    public void onUseStop(GameObject usedBy)
-    {
-    }
 }
