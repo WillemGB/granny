@@ -10,9 +10,7 @@ public class Inventory : MonoBehaviour {
     private bool showInventory = true;
     private ItemDatabase database;
 
-	public int inventoryXoffset;
-	public int inventoryYoffset;
-
+	public int playerNumber;
 
     // Use this for initialization
     void Start() {
@@ -58,7 +56,22 @@ public class Inventory : MonoBehaviour {
             {
                 for (int y = 0; y < slotsY; y++)
                 {
-					Rect slotRect = new Rect(x * 60 + inventoryXoffset, y * 60 + inventoryYoffset, 50, 50);
+					Rect slotRect = new Rect (x * 60, y * 60, 50, 50);
+					switch (playerNumber) {
+					case 1:
+						slotRect = new Rect (x * 60, y * 60, 50, 50);
+						break;
+					case 2:
+						slotRect = new Rect (Screen.width - 60, 0, 50, 50);
+						break;
+					case 3:
+						slotRect = new Rect (0, Screen.height - 60, 50, 50);
+						break;
+					case 4:
+						slotRect = new Rect (Screen.width - 60, Screen.height - 60, 50, 50);
+						break;
+					}
+					//Rect slotRect = new Rect(x * 60 + inventoryXoffset, y * 60 + inventoryYoffset, 50, 50);
                     GUI.Box(slotRect, "", skin.GetStyle("Slot"));
                     slots[i] = inventory[i];
                     if (slots[i].itemName != null)

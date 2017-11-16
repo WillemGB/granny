@@ -6,6 +6,7 @@ public class HeliController : MonoBehaviour {
 
 
     public GameObject grannyHeli;
+    public GameObject grannyTeam2Heli;
     public GameObject heliCam;
     public GameObject parent;
     public GameObject gameManager;
@@ -33,9 +34,16 @@ public class HeliController : MonoBehaviour {
             Debug.Log("player in Heli");
 
 			Invoke("startExplosions", 1.5f);
-           
+
             collision.other.gameObject.active = false;
-            grannyHeli.active = true;
+            if (collision.gameObject.name == "Player1" || collision.gameObject.name == "Player2")
+            {
+                grannyHeli.active = true;
+            }
+            else if (collision.gameObject.name == "Player3" || collision.gameObject.name == "Player4")
+            {
+                grannyTeam2Heli.active = true;
+            }
 
             Animator animatorParent = parent.GetComponent<Animator>();
             animatorParent.SetBool("startHeli", true);
@@ -46,9 +54,6 @@ public class HeliController : MonoBehaviour {
             heliCam.GetComponent<CameraHeliController>().followHeli();
 
             //start epic end sound
-
-
-
         }
     }
 

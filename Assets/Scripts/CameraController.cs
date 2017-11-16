@@ -6,8 +6,6 @@ public class CameraController : MonoBehaviour {
 
 	public GameObject player;
 
-    public GameObject heli;
-
 	private Vector3 offset;
     private Vector3 offsetHeli;
 
