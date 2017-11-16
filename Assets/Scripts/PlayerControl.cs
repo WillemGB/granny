@@ -4,6 +4,8 @@ using System;
 
 public class PlayerControl : MonoBehaviour {
     public GameObject granny;
+    public int team;
+
 	public float moveSpeed = 0.5f;
 	public int characterStrength = 250; 	
 	public string controllerNumber;
