@@ -6,7 +6,7 @@ public class HeliController : MonoBehaviour {
 
 
     public GameObject grannyHeli;
-    public GameObject cam1;
+    public GameObject heliCam;
     public GameObject parent;
     public GameObject gameManager;
    
@@ -37,10 +37,12 @@ public class HeliController : MonoBehaviour {
             Animator animatorParent = parent.GetComponent<Animator>();
             animatorParent.SetBool("startHeli", true);
 
-            cam1.GetComponent<CameraController>().followHeli();
+            gameManager.GetComponent<GameManagerControl>().startEndSound();
+            gameManager.GetComponent<GameManagerControl>().setHeliCam();
+
+            heliCam.GetComponent<CameraHeliController>().followHeli();
 
             //start epic end sound
-            gameManager.GetComponent<GameManagerControl>().startEndSound();
 
 
 
