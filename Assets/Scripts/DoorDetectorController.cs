@@ -12,19 +12,18 @@ public class DoorDetectorController : MonoBehaviour {
     bool[] detectorArrayTeamOne = new bool[] { false, false};
     bool[] detectorArrayTeamTwo = new bool[] { false, false};
 
-
+    private AudioSource audioSource;
 
     // Use this for initialization
     void Start () {
-		
-	}
+        audioSource = GetComponent<AudioSource>();
+    }
 	
 
 
 	// Update is called once per frame
 	void Update () {
-		
-	}
+    }
 
     void CheckForAllDetectors(int teamNumber)
     {
@@ -49,10 +48,14 @@ public class DoorDetectorController : MonoBehaviour {
         //Open the door!
         if (isBusyOne)
         {
+            audioSource.Play();
             doorTeam1.GetComponent<DoorScript>().openDetectedDoor();
         }
         if (isBusyTwo)
+        {
+            audioSource.Play();
             doorTeam2.GetComponent<DoorScript>().openDetectedDoor();
+        }
     }
 
     public void isOnDetector(int number, int teamNumber)
