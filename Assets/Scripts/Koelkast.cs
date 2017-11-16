@@ -14,7 +14,7 @@ public class Koelkast : MonoBehaviour, InteractionInterface {
 		
 	}
 
-	public void onUse() {
+	public void onUse(GameObject usedBy) {
 		Debug.Log ("using koelkast");
 	}
 

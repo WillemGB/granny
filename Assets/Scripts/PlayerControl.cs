@@ -128,7 +128,7 @@ public class PlayerControl : MonoBehaviour {
 			Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
 			foreach (Component com in comps) {
 				var interactableScript = com as InteractionInterface;
-				interactableScript.onUse ();
+				interactableScript.onUse (this.gameObject);
 				var itemId = interactableScript.loot();
 				if ((controllerNumber == "" || controllerNumber == "2") && itemId == 1) {
 					inventory.AddItem (itemId);

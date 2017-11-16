@@ -6,7 +6,7 @@ public class LootableItem : MonoBehaviour, InteractionInterface {
 
 	public int lootableItem = -1;
 
-	public void onUse () {
+	public void onUse (GameObject usedBy) {
 
 	}
 
