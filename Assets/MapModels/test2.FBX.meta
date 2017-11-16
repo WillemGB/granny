@@ -626,6 +626,129 @@ ModelImporter:
     4300240: Rectangle012
     4300242: Rectangle013
     4300244: Rectangle012
+    6400000: Box005
+    6400002: Box006
+    6400004: Box007
+    6400006: Box008
+    6400008: Box009
+    6400010: Box010
+    6400012: Box011
+    6400014: Box012
+    6400016: Box016
+    6400018: Box018
+    6400020: Box020
+    6400022: Box021
+    6400024: Box022
+    6400026: Box023
+    6400028: Box027
+    6400030: Box030
+    6400032: Box031
+    6400034: Box034
+    6400036: Box035
+    6400038: Box038
+    6400040: Box039
+    6400042: Box041
+    6400044: Box042
+    6400046: Box043
+    6400048: Box044
+    6400050: Box045
+    6400052: Box046
+    6400054: Box047
+    6400056: Box048
+    6400058: Box049
+    6400060: Box050
+    6400062: Box057
+    6400064: Box059
+    6400066: Box060
+    6400068: Box061
+    6400070: Box062
+    6400072: Box063
+    6400074: Box064
+    6400076: Box065
+    6400078: Box066
+    6400080: Box067
+    6400082: Box068
+    6400084: Box069
+    6400086: Box070
+    6400088: Box071
+    6400090: Box072
+    6400092: Box073
+    6400094: Box074
+    6400096: Box086
+    6400098: Box087
+    6400100: Box088
+    6400102: Box089
+    6400104: Box090
+    6400106: Box097
+    6400108: Box100
+    6400110: Box101
+    6400112: Box102
+    6400114: Box103
+    6400116: Box104
+    6400118: Box107
+    6400120: Box112
+    6400122: Box116
+    6400124: Box117
+    6400126: Box118
+    6400128: Box121
+    6400130: Box122
+    6400132: Box123
+    6400134: Box124
+    6400136: Box125
+    6400138: Box129
+    6400140: Box130
+    6400142: Box131
+    6400144: Box133
+    6400146: Box134
+    6400148: Box135
+    6400150: Box136
+    6400152: Box138
+    6400154: Box139
+    6400156: Box140
+    6400158: Box141
+    6400160: Box142
+    6400162: Box143
+    6400164: Box144
+    6400166: Box145
+    6400168: Box146
+    6400170: Box147
+    6400172: Box148
+    6400174: Box149
+    6400176: Box150
+    6400178: Box151
+    6400180: Box152
+    6400182: Box153
+    6400184: Box154
+    6400186: Box155
+    6400188: Box156
+    6400190: Box157
+    6400192: Cylinder001
+    6400194: Cylinder087
+    6400196: Cylinder094
+    6400198: Cylinder095
+    6400200: Cylinder096
+    6400202: Rectangle002
+    6400204: Rectangle003
+    6400206: Rectangle004
+    6400208: Rectangle005
+    6400210: Rectangle006
+    6400212: Rectangle007
+    6400214: Rectangle008
+    6400216: Rectangle009
+    6400218: Rectangle010
+    6400220: Rectangle011
+    6400222: Rectangle012
+    6400224: Rectangle012 1
+    6400226: Rectangle013
+    6400228: Roof
+    6400230: Shape017
+    6400232: Shape018
+    6400234: Shape019
+    6400236: Shape020
+    6400238: Text001
+    6400240: Wall012
+    6400242: Wall013
+    6400244: Wall014
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -738,7 +861,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
