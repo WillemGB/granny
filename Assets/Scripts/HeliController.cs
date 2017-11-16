@@ -50,6 +50,7 @@ public class HeliController : MonoBehaviour {
 
             gameManager.GetComponent<GameManagerControl>().startEndSound();
             gameManager.GetComponent<GameManagerControl>().setHeliCam();
+            gameManager.GetComponent<GameManagerControl>().resetGame();
 
             heliCam.GetComponent<CameraHeliController>().followHeli();
 

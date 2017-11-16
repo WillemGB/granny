@@ -94,4 +94,15 @@ public class GameManagerControl : MonoBehaviour
         cam4.active = false;
         camHeli.active = true;
     }
+
+    public void resetGame()
+    {
+        Invoke("GoToStartScreen", 12f);
+    }
+
+    
+    void GoToStartScreen()
+    {
+        Application.LoadLevel(0);
+    }
 }
