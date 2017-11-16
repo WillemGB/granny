@@ -6,7 +6,7 @@ public class LootableItem : MonoBehaviour, InteractionInterface {
 
 	public int lootableItem = -1;
 
-	public void onUseStart (GameObject usedBy) {
+	public void onUse (GameObject usedBy) {
 
 	}
 
@@ -17,8 +17,4 @@ public class LootableItem : MonoBehaviour, InteractionInterface {
 	public void removeLoot() {
 		lootableItem = -1;
 	}
-
-    public void onUseStop(GameObject usedBy)
-    {
-    }
 }
