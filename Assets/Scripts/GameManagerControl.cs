@@ -13,6 +13,8 @@ public class GameManagerControl : MonoBehaviour
     public PlayerControl Player3ControllerScript;
     public PlayerControl Player4ControllerScript;
 
+    public AudioClip endSound;
+
 	private AudioSource backgroundMusic;
 
     private float _countDownTime = 4.0f;
@@ -70,5 +72,11 @@ public class GameManagerControl : MonoBehaviour
         Player2ControllerScript.enabled = false;
         Player3ControllerScript.enabled = false;
         Player4ControllerScript.enabled = false;
+    }
+
+    public void startEndSound()
+    {
+        backgroundMusic.clip = endSound;
+        backgroundMusic.Play();
     }
 }
