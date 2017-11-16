@@ -104,7 +104,7 @@ public class PlayerControl : MonoBehaviour {
 			Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
 			foreach (Component com in comps) {
 				var interactableScript = com as InteractionInterface;
-				interactableScript.onUseStart(this.gameObject);
+				interactableScript.onUse(this.gameObject);
 				var itemId = interactableScript.loot();
 				if ((controllerNumber == "" || controllerNumber == "2") && itemId == 1) {
 					inventory.AddItem (itemId);
@@ -117,15 +117,7 @@ public class PlayerControl : MonoBehaviour {
 				}
 			}
         }
-        if (other.tag == "Interactable" && Input.GetButtonUp("Fire1" + controllerNumber)) //button released
-        {
-            Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
-            foreach (Component com in comps)
-            {
-                var interactableScript = com as InteractionInterface;
-                interactableScript.onUseStop(this.gameObject);
-            }
-        }
+
     }
 
     void Animate()
