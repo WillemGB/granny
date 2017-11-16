@@ -14,7 +14,7 @@ public class Koelkast : MonoBehaviour, InteractionInterface {
 		
 	}
 
-	public void onUse(GameObject usedBy) {
+	public void onUseStart(GameObject usedBy) {
 		Debug.Log ("using koelkast");
 	}
 
@@ -23,4 +23,8 @@ public class Koelkast : MonoBehaviour, InteractionInterface {
 	}
 
 	public void removeLoot() { }
+
+    public void onUseStop(GameObject usedBy)
+    {
+    }
 }

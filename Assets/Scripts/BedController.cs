@@ -8,10 +8,29 @@ public class BedController : MonoBehaviour, InteractionInterface {
         return 0;
     }
 
-    public void onUse(GameObject usedBy)
+    public void onUseStart(GameObject usedBy)
     {
-        var bla = usedBy.tag;
-        Debug.Log("Bed used by" + usedBy.tag);
+        Debug.Log("Bed used by " + usedBy.tag);
+
+        if(usedBy.tag == "Player")
+        {
+            var fixedJoint = this.GetComponent<FixedJoint>();
+
+            Debug.Log("Attach bed to player");
+            fixedJoint.connectedBody = usedBy.GetComponent<Rigidbody>();
+        }
+    }
+
+    public void onUseStop(GameObject usedBy)
+    {
+        Debug.Log("on use stop bed");
+        if (usedBy.tag == "Player")
+        {
+            var fixedJoint = this.GetComponent<FixedJoint>();
+
+            Debug.Log("Detach bed from player");
+            fixedJoint.connectedBody = null;
+        }
     }
 
     public void removeLoot()

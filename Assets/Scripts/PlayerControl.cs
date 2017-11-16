@@ -91,31 +91,7 @@ public class PlayerControl : MonoBehaviour {
             timeSinceLastCall = 0;   // reset timer back to 0
         }
 
-        HandlePullBed(); //Jeroen: werkt alleen als de sphere collider uit staat
-
         Animate();
-    }
-
-    private void HandlePullBed()
-    {
-        if(Input.GetKey(KeyCode.LeftControl)) //pak het bed op als je P ingedrukt houdt
-        {
-            RaycastHit hit;
-            Vector3 fwd = transform.TransformDirection(Vector3.forward);
-
-            if (Physics.Raycast(transform.position, fwd, out hit, 1f))
-            {
-                if (hit.transform.tag == "Bed")
-                {
-                    var fixedJoint = hit.collider.GetComponent<FixedJoint>();
-                    fixedJoint.connectedBody = this.GetComponent<Rigidbody>();
-                }
-            }
-        }
-        else
-        {
-            //Jeroen todo: loskoppelen?
-        }
     }
 
     void OnTriggerStay (Collider other)
@@ -128,7 +104,7 @@ public class PlayerControl : MonoBehaviour {
 			Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
 			foreach (Component com in comps) {
 				var interactableScript = com as InteractionInterface;
-				interactableScript.onUse (this.gameObject);
+				interactableScript.onUseStart(this.gameObject);
 				var itemId = interactableScript.loot();
 				if ((controllerNumber == "" || controllerNumber == "2") && itemId == 1) {
 					inventory.AddItem (itemId);
@@ -140,8 +116,17 @@ public class PlayerControl : MonoBehaviour {
 					Debug.Log ("key 2 opgepakt");
 				}
 			}
-		}
-	}
+        }
+        if (other.tag == "Interactable" && Input.GetButtonUp("Fire1" + controllerNumber)) //button released
+        {
+            Component[] comps = other.gameObject.GetComponents(typeof(InteractionInterface));
+            foreach (Component com in comps)
+            {
+                var interactableScript = com as InteractionInterface;
+                interactableScript.onUseStop(this.gameObject);
+            }
+        }
+    }
 
     void Animate()
     {
