@@ -169,7 +169,7 @@ public class PlayerControl : MonoBehaviour {
                 break;
 			case "2":
 				Debug.Log("Player 2 performs dash");
-                rigidBody.AddForce(moveVelocity * 75, ForceMode.Force);
+                rigidBody.AddForce(moveVelocity * 55, ForceMode.Force);
                 audioSource.Play();
                 break;
             case "3":
