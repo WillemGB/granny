@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BedController : MonoBehaviour, InteractionInterface {
+public class PickupController : MonoBehaviour, InteractionInterface {
     private string controllernumber;
     public int loot()
     {
@@ -11,7 +11,7 @@ public class BedController : MonoBehaviour, InteractionInterface {
 
     public void onUse(GameObject usedBy)
     {
-        Debug.Log("Bed used by " + usedBy.tag);
+        Debug.Log(name + " used by " + usedBy.name);
 
         if(usedBy.tag == "Player")
         {
@@ -20,13 +20,13 @@ public class BedController : MonoBehaviour, InteractionInterface {
 
             if(fixedJoint.connectedBody == null)
             {
-                Debug.Log("Attach bed to player");
+                Debug.Log(name + "attached to player " + usedBy.name);
                 fixedJoint.connectedBody = usedBy.GetComponent<Rigidbody>();
                 controllernumber = playerControl.controllerNumber;
             }
             else
             {
-                Debug.Log("Bed is al gekoppeld");
+                Debug.Log(name + " already attached to " + fixedJoint.connectedBody.name);
             }
         }
     }
@@ -38,7 +38,7 @@ public class BedController : MonoBehaviour, InteractionInterface {
             var fixedJoint = this.GetComponent<FixedJoint>();
             if (fixedJoint != null && fixedJoint.connectedBody != null)
             {
-                Debug.Log("Detach bed from player");
+                Debug.Log(name + " detached from " + fixedJoint.connectedBody.name);
                 fixedJoint.connectedBody = null;
             }
         }
