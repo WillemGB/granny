@@ -15,8 +15,7 @@ public class StartMenuCanvasScript : MonoBehaviour {
 
     void Awake()
     {
-        BackgroundImage.enabled = false;
-        PressAKey.enabled = false;
+		UpgradeImage.enabled = false;
     }
 
     void FixedUpdate()
@@ -35,9 +34,9 @@ public class StartMenuCanvasScript : MonoBehaviour {
 
     public void activateStartScreen()
     {
-        UpgradeImage.enabled = false;
-        BackgroundImage.enabled = true;
-        PressAKey.enabled = true;
+		BackgroundImage.enabled = false;
+		UpgradeImage.enabled = true;
+        PressAKey.enabled = false;
         readyToLoadNextScene = true;
     }
 }
