@@ -36,8 +36,9 @@ public class GameManagerControl : MonoBehaviour
 
         // Init the canvas controller
         CanvasControllerScript = FindObjectOfType<CanvasController>();
-		backgroundMusic = GetComponent<AudioSource> ();
-		if (!debugging) {
+		backgroundMusic = GetComponent<AudioSource>();
+
+        if (!debugging) {
 	        // Freeze player Scripts
 	        DisableScripts();
 

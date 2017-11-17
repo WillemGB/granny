@@ -22,6 +22,9 @@ public class CanvasController : MonoBehaviour
     public Sprite OneSprite;
     public Sprite StartSprite;
 
+    private AudioSource goAudioSource;
+    private AudioSource threeAudioSource;
+
     void Awake()
     {
         // Force unity singleton pattern for gamemanager
@@ -32,6 +35,10 @@ public class CanvasController : MonoBehaviour
             Destroy(gameObject);
 
         TimerText = TimerText.GetComponent<Text>();
+        threeAudioSource = GetComponents<AudioSource>()[0];
+        goAudioSource = GetComponents<AudioSource>()[1];
+
+        Debug.Log(threeAudioSource == null);
     }
 	
 	// Update is called once per frame
@@ -107,6 +114,7 @@ public class CanvasController : MonoBehaviour
 
             CountdownImage.sprite = StartSprite;
             CountdownImage.transform.localScale *= 1.8f;
+            goAudioSource.Play();
             _countdownActive = false;
         }
         else if (_countdownSeconds < 2.0f)
@@ -130,6 +138,8 @@ public class CanvasController : MonoBehaviour
         else
         {
             CountdownImage.sprite = ThreeSprite;
+            if (!threeAudioSource.isPlaying)
+                threeAudioSource.Play();
         }
     }
 }
