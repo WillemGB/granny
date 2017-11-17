@@ -23,7 +23,7 @@ public class GameManagerControl : MonoBehaviour
 
 	private AudioSource backgroundMusic;
 
-    private float _countDownTime = 4.0f;
+    private float _countDownTime = 4.7f;
 
     void Awake()
     {
@@ -38,17 +38,21 @@ public class GameManagerControl : MonoBehaviour
         CanvasControllerScript = FindObjectOfType<CanvasController>();
 		backgroundMusic = GetComponent<AudioSource>();
 
-        if (!debugging) {
-	        // Freeze player Scripts
-	        DisableScripts();
+        
+    }
 
-	        // Starts Countdown
-	        CanvasControllerScript.StartCountdown(_countDownTime);
-	        StartCoroutine(this.WaitForCountdown());
+	void Start() {
+		if (!debugging) {
+			// Freeze player Scripts
+			DisableScripts();
+
+			// Starts Countdown
+			CanvasControllerScript.StartCountdown(_countDownTime);
+			StartCoroutine(this.WaitForCountdown());
 		}
 
 		backgroundMusic.Play ();
-    }
+	}
 
     // Waits for a async countdown
     private IEnumerator WaitForCountdown()
