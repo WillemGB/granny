@@ -173,20 +173,20 @@ public class PlayerControl : MonoBehaviour {
         // Perform action based on controller number
         switch (controllerNumber)
         {
-            case "":
+            case "3":
                 Debug.Log("Player 1 shoots fake teeth!");
                 shootFakeTeeth();
                 break;
-			case "2":
+			case "4":
 				Debug.Log("Player 2 performs dash");
                 rigidBody.AddForce(moveVelocity * 55, ForceMode.Force);
                 audioSource.Play();
                 break;
-            case "3":
+            case "":
                 Debug.Log("Player 3 punches");
                 Punch();
                 break;
-            case "4":
+            case "2":
 				Debug.Log ("Player 4 shits himself");
 				Defecate ();
                 break;
